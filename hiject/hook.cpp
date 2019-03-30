@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "hook.h"
 #include "windows.h"
 #include "vector"
@@ -109,7 +109,7 @@ void hook() {
 	{
 		hModule = GetModuleHandle(L"kernel32.dll");
 		if (!hModule) {
-			MessageBox(0, L"»ñÈ¡kernelÄ£¿éµØÖ·Ê§°Ü", 0, 0);
+			MessageBox(0, L"è·å–kernelæ¨¡å—åœ°å€å¤±è´¥", 0, 0);
 			return;
 		}
 	}
@@ -117,16 +117,16 @@ void hook() {
 	memcpy(oldCode, pZwProtectVirtualMemory, 5);
 	auto pfuncGetTimeAsFileTime = GetProcAddress(hModule, "GetSystemTimeAsFileTime");
 	if (!pfuncGetTimeAsFileTime) {
-		MessageBox(0, L"»ñÈ¡funcµØÖ·Ê§°Ü", 0, 0);
+		MessageBox(0, L"è·å–funcåœ°å€å¤±è´¥", 0, 0);
 		return;
 	}
-	OutputDebugString(L"[sr173]:»ñÈ¡µØÖ·³É¹¦¿ªÊ¼hook");
+	OutputDebugString(L"[sr173]:è·å–åœ°å€æˆåŠŸå¼€å§‹hook");
 	hookRetn(pfuncGetTimeAsFileTime, shellGetTimeAsFileTime);
 
 	auto pfuncCreateFile = GetProcAddress(hModule, "CreateFileA");
 	farCreateFileA = pfuncCreateFile;
 	if (!pfuncCreateFile) {
-		MessageBox(0, L"»ñÈ¡func@1µØÖ·Ê§°Ü", 0, 0);
+		MessageBox(0, L"è·å–func@1åœ°å€å¤±è´¥", 0, 0);
 		return;
 	}
 	hookRetn(pfuncCreateFile, hookCreateFileA);
