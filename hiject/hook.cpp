@@ -95,19 +95,43 @@ __declspec(naked) void hookCreateFileA() {
 		mov edi, edi;
 		push ebp;
 		mov ebp, esp;
-		push ecx;
-		mov edx, farCreateFileA;
-		add edx, 6;
-		push edx;
+		push farCreateFileA;
 		retn;
 	}
 }
 
+void hookJmp(LPVOID oldAddr, LPVOID addr) {
+	UINT data;
+	data = (UINT)addr - (UINT)oldAddr - 5;
+	std::vector<BYTE> code;
+	code.push_back(0xE9);
+	code.push_back(*((BYTE*)(&data) + 0));
+	code.push_back(*((BYTE*)(&data) + 1));
+	code.push_back(*((BYTE*)(&data) + 2));
+	code.push_back(*((BYTE*)(&data) + 3));
+	DWORD oldProtect;
+	MEMORY_BASIC_INFORMATION mbi_thunk;
+	VirtualQuery(oldAddr, &mbi_thunk, sizeof(MEMORY_BASIC_INFORMATION));
+	VirtualProtect(pZwProtectVirtualMemory, 5, PAGE_EXECUTE_READWRITE, &oldProtect);
+	memcpy(pZwProtectVirtualMemory, oldCode, 5);
+	VirtualProtect(pZwProtectVirtualMemory, 5, oldProtect, &oldProtect);
+
+	VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, PAGE_EXECUTE_READWRITE, &oldProtect);
+	int err = GetLastError();
+	_itoa_s(err, buffer, 16);
+	//MessageBoxA(0, buffer, 0, 0);
+	_itoa_s((int)oldAddr, buffer, 16);
+	//MessageBoxA(0, buffer, 0, 0);
+	WriteProcessMemory(GetCurrentProcess(), oldAddr, code.data(), code.size(), nullptr);
+	VirtualProtectEx(GetCurrentProcess(), mbi_thunk.BaseAddress, mbi_thunk.RegionSize, oldProtect, &oldProtect);
+	return;
+}
+
 void hook() {
-	auto hModule = GetModuleHandle(L"kernelbase.dll");
+	auto hModule = LoadLibrary(L"kernelbase.dll");
 	if (!hModule)
 	{
-		hModule = GetModuleHandle(L"kernel32.dll");
+		hModule = LoadLibrary(L"kernel32.dll");
 		if (!hModule) {
 			MessageBox(0, L"获取kernel模块地址失败", 0, 0);
 			return;
@@ -124,10 +148,10 @@ void hook() {
 	hookRetn(pfuncGetTimeAsFileTime, shellGetTimeAsFileTime);
 
 	auto pfuncCreateFile = GetProcAddress(hModule, "CreateFileA");
-	farCreateFileA = pfuncCreateFile;
+	farCreateFileA = (FARPROC)((UINT)pfuncCreateFile + 5);
 	if (!pfuncCreateFile) {
 		MessageBox(0, L"获取func@1地址失败", 0, 0);
 		return;
 	}
-	hookRetn(pfuncCreateFile, hookCreateFileA);
+	hookJmp(pfuncCreateFile, hookCreateFileA);
 }
