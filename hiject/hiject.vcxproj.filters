@@ -24,6 +24,9 @@
     <ClInclude Include="hook.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\admin\source\repos\LOLDIspatcherMessagePrint\cef_inject_dll\PolyHook.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

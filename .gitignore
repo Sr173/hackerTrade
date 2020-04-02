@@ -3,3 +3,15 @@
 ################################################################################
 
 /.vs/hiject/v16
+*.exp
+*.iobj
+*.ipdb
+*.lib
+*.pdb
+*.tlog
+*.obj
+/hiject/Debug
+/hiject/Release
+/hiject/x64/Debug
+*.exe
+/hiject/t_baibaoyun_win32.dll
