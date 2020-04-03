@@ -6,6 +6,9 @@
 #include <io.h>
 #include <iostream>
 #include "winsock2.h"
+#include "json.hpp"
+
+using namespace nlohmann;
 
 #pragma comment(lib, "Ws2_32.lib.")
 
@@ -17,7 +20,14 @@
 #pragma comment(lib,"../Capstone/msvc/x86/Debug/capstone.lib")
 #endif
 
-
+char* TCharToChar(const TCHAR* tchar)
+{
+	static char buffer[0x1000];
+	int iLength;
+	iLength = WideCharToMultiByte(CP_ACP, 0, tchar, -1, NULL, 0, NULL, NULL);
+	WideCharToMultiByte(CP_ACP, 0, tchar, -1, buffer, iLength, NULL, NULL);
+	return buffer;
+}
 
 void InitConsole();
 
@@ -27,10 +37,10 @@ int WSAAPI my_connect(
 	_In_reads_bytes_(namelen) const struct sockaddr FAR* name,
 	_In_ int namelen
 ) {
-	((SOCKADDR_IN*)name)->sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
-	((SOCKADDR_IN*)name)->sin_port = htons(65500);
-
-	spdlog::info("connect {}", name->sa_data);
+	// ((SOCKADDR_IN*)name)->sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
+	// ((SOCKADDR_IN*)name)->sin_port = htons(65500);
+	//
+	// spdlog::info("connect {}", name->sa_data);
 
 	return o_connect(s, name, namelen);
 }
@@ -64,20 +74,59 @@ MyTerminateProcess(
 	return true;
 }
 
-int json_encode(DWORD_PTR data){
-	int* p_this;
-	__asm mov p_this, ecx;
+typedef int(__thiscall* t_json_encode)(DWORD pThis, DWORD data , DWORD data3);
+t_json_encode o_json_encode;
+int __fastcall json_encode(DWORD data, DWORD data1, DWORD data2, DWORD data3){
+	int result = o_json_encode(data, data2, data3);
+
+	const auto json_str = *reinterpret_cast<std::string*>(data);
+	auto dec_json = nlohmann::json::parse(json_str);
 	
-	spdlog::info("{}", reinterpret_cast<char*>(p_this + 1))
+	spdlog::info("{}", dec_json["method"]);
+	return result;
+}
+
+typedef int(__thiscall* t_json_decode)(DWORD pThis, int a2, int a3, int a4);
+t_json_decode o_json_decode;
+int __fastcall json_decode(DWORD data, DWORD a1, int a2, int a3, int a4) {
+	int result = o_json_decode(data, a2, a3, a4);
+	spdlog::warn("{}", *(char**)(data + 0x54));
+
+	auto dec_json = nlohmann::json::parse(*(char**)(data + 0x54));
+	spdlog::warn("{}", dec_json["status"]);
+
+	return result;
 }
 
 
 void hook() {
 	InitConsole();
 	
-	auto handle_kernel32 = LoadLibrary(L"kernelbase.dll");
-	auto handle_user32 = LoadLibrary(L"User32.dll");
-	auto handle_ws2_32 = LoadLibrary(L"WS2_32.dll");
+	auto handle_kernel32 = GetModuleHandle(L"kernelbase.dll");
+	auto handle_user32 = GetModuleHandle(L"User32.dll");
+	auto handle_ws2_32 = GetModuleHandle(L"WS2_32.dll");
+
+	std::thread([]() {
+		while (!GetModuleHandle(L"Web.dll")) {
+			Sleep(0);
+		}
+		auto hook = new HOOK_DETOUR;
+		auto handle_web = GetModuleHandle(L"Web.dll");
+		spdlog::info("Web {}", int((BYTE*)handle_web + 0x33A90));
+		hook = new HOOK_DETOUR;
+		auto h_json_encode = ((BYTE*)handle_web + 0x33A90);
+		hook->SetupHook((BYTE*)h_json_encode, (BYTE*)&json_encode); //can cast to byte* to
+		hook->Hook();
+		o_json_encode = hook->GetOriginal<t_json_encode>();
+
+		
+		hook = new HOOK_DETOUR;
+		auto h_json_decode = ((BYTE*)handle_web + 0x35440);
+		hook->SetupHook((BYTE*)h_json_decode, (BYTE*)&json_decode); //can cast to byte* to
+		hook->Hook();
+		o_json_decode = hook->GetOriginal<t_json_decode>();
+		}).detach();
+	
 
 	
 	if (!handle_kernel32)
@@ -88,7 +137,6 @@ void hook() {
 			return;
 		}
 	}
-
 
 	auto hook = new HOOK_DETOUR;
 	hook = new HOOK_DETOUR;
@@ -106,6 +154,8 @@ void hook() {
 	hook->SetupHook((BYTE*)h_connect, (BYTE*)& my_connect); //can cast to byte* to
 	hook->Hook();
 	o_connect = hook->GetOriginal<decltype(&connect)>();
+
+
 }
 
 
