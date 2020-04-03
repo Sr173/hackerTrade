@@ -45,6 +45,13 @@ MyTerminateProcess(
 	return true;
 }
 
+int json_encode(DWORD_PTR data){
+	int* p_this;
+	__asm mov p_this, ecx;
+	
+	spdlog::info("{}", reinterpret_cast<char*>(p_this + 1))
+}
+
 
 void hook() {
 	InitConsole();
