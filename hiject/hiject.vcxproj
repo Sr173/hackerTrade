@@ -23,7 +23,7 @@
     <ProjectGuid>{7DD2BC1E-5683-4612-99C6-8AB18ECD80A6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>hiject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -73,8 +73,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>IPHLPAPI</TargetName>
-    <IncludePath>G:\github\spdlog\include;$(IncludePath)</IncludePath>
-    <OutDir>C:\Users\admin\Documents\Tencent Files\66456804\FileRecv\战天明_单开</OutDir>
+    <IncludePath>D:\github\spdlog\include;$(IncludePath)</IncludePath>
+    <OutDir>C:\Users\admin\Desktop\clx\战天明_双开</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -82,7 +82,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>IPHLPAPI</TargetName>
-    <IncludePath>G:\github\spdlog\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\github\spdlog\include;$(IncludePath)</IncludePath>
+    <OutDir>C:\Users\admin\Desktop\clx\战天明_双开</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
