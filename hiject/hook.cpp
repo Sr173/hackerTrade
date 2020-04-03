@@ -5,6 +5,9 @@
 #include <fcntl.h>
 #include <io.h>
 #include <iostream>
+#include "winsock2.h"
+
+#pragma comment(lib, "Ws2_32.lib.")
 
 #ifdef _WIN64
 #pragma comment(lib,"../Capstone/msvc/x64/Debug/capstone.lib")
@@ -14,7 +17,23 @@
 #pragma comment(lib,"../Capstone/msvc/x86/Debug/capstone.lib")
 #endif
 
+
+
 void InitConsole();
+
+decltype(&connect) o_connect;
+int WSAAPI my_connect(
+	_In_ SOCKET s,
+	_In_reads_bytes_(namelen) const struct sockaddr FAR* name,
+	_In_ int namelen
+) {
+	((SOCKADDR_IN*)name)->sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
+	((SOCKADDR_IN*)name)->sin_port = htons(65500);
+
+	spdlog::info("connect {}", name->sa_data);
+
+	return o_connect(s, name, namelen);
+}
 
 VOID
 WINAPI
@@ -51,6 +70,7 @@ void hook() {
 	
 	auto handle_kernel32 = LoadLibrary(L"kernelbase.dll");
 	auto handle_user32 = LoadLibrary(L"User32.dll");
+	auto handle_ws2_32 = LoadLibrary(L"WS2_32.dll");
 
 	
 	if (!handle_kernel32)
@@ -71,9 +91,14 @@ void hook() {
 
 	hook = new HOOK_DETOUR;
 	auto h_TerminateProcess = GetProcAddress(handle_kernel32, "TerminateProcess");
-	hook->SetupHook((BYTE*)h_TerminateProcess, (BYTE*)&h_TerminateProcess); //can cast to byte* to
+	hook->SetupHook((BYTE*)h_TerminateProcess, (BYTE*)&MyTerminateProcess); //can cast to byte* to
 	hook->Hook();
 
+	hook = new HOOK_DETOUR;
+	auto h_connect = GetProcAddress(handle_ws2_32, "connect");
+	hook->SetupHook((BYTE*)h_connect, (BYTE*)& my_connect); //can cast to byte* to
+	hook->Hook();
+	o_connect = hook->GetOriginal<decltype(&connect)>();
 }
 
 
