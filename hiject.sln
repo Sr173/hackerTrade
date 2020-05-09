@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hiject", "hiject\hiject.vcxproj", "{7DD2BC1E-5683-4612-99C6-8AB18ECD80A6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ymjh", "ymjh\ymjh.vcxproj", "{64FA205A-80BF-4BC5-8A31-5935A59FC687}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{7DD2BC1E-5683-4612-99C6-8AB18ECD80A6}.Release|x64.Build.0 = Release|x64
 		{7DD2BC1E-5683-4612-99C6-8AB18ECD80A6}.Release|x86.ActiveCfg = Release|Win32
 		{7DD2BC1E-5683-4612-99C6-8AB18ECD80A6}.Release|x86.Build.0 = Release|Win32
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Debug|x64.ActiveCfg = Debug|x64
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Debug|x64.Build.0 = Debug|x64
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Debug|x86.ActiveCfg = Debug|Win32
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Debug|x86.Build.0 = Debug|Win32
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Release|x64.ActiveCfg = Release|x64
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Release|x64.Build.0 = Release|x64
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Release|x86.ActiveCfg = Release|Win32
+		{64FA205A-80BF-4BC5-8A31-5935A59FC687}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

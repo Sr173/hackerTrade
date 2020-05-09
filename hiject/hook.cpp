@@ -29,6 +29,21 @@ char* TCharToChar(const TCHAR* tchar)
 	return buffer;
 }
 
+std::string* replace_all(std::string* str, const   std::string old_value, const   std::string new_value)
+{
+	while (true)
+	{
+		std::string::size_type   pos(0);
+		if ((pos = str->find(old_value)) != std::string::npos)
+		{
+			str->replace(pos, old_value.length(), new_value);
+		}
+		else { break; }
+	}
+	return   str;
+}
+
+
 void InitConsole();
 
 decltype(&connect) o_connect;
@@ -74,27 +89,40 @@ MyTerminateProcess(
 	return true;
 }
 
-typedef int(__thiscall* t_json_encode)(DWORD pThis, DWORD data , DWORD data3);
-t_json_encode o_json_encode;
-int __fastcall json_encode(DWORD data, DWORD data1, DWORD data2, DWORD data3){
-	int result = o_json_encode(data, data2, data3);
+bool is_replace_next = false;
 
-	const auto json_str = *reinterpret_cast<std::string*>(data);
-	auto dec_json = nlohmann::json::parse(json_str);
+typedef int(__thiscall* t_json_encode)(DWORD pThis, DWORD data);
+t_json_encode o_json_encode;
+int __fastcall json_encode(DWORD data, DWORD data1, DWORD data2){
+	int result = o_json_encode(data, data2);
+
+	replace_all(reinterpret_cast<std::string*>(data), "3DK", "2DK");
+
+	replace_all(reinterpret_cast<std::string*>(data), "FC56D1658482E78FF3D18283B06362A7", "C8826BC13927F2F76DB95021ADC9D998");
+
 	
-	spdlog::info("{}", dec_json["method"]);
+	// if (reinterpret_cast<std::string*>(data)->find("Login") == std::string::npos) {
+	// 	replace_all(reinterpret_cast<std::string*>(data), "fds324dfs", "66456804");
+	// }
+	if (reinterpret_cast<std::string*>(data)->find("UserLogin") != std::string::npos) {
+		is_replace_next = true;
+	}
+	//
+	
+	spdlog::info("{}", *reinterpret_cast<std::string*>(data));
 	return result;
 }
 
-typedef int(__thiscall* t_json_decode)(DWORD pThis, int a2, int a3, int a4);
+typedef int(__thiscall* t_json_decode)(DWORD pThis);
 t_json_decode o_json_decode;
-int __fastcall json_decode(DWORD data, DWORD a1, int a2, int a3, int a4) {
-	int result = o_json_decode(data, a2, a3, a4);
-	spdlog::warn("{}", *(char**)(data + 0x54));
-
-	auto dec_json = nlohmann::json::parse(*(char**)(data + 0x54));
-	spdlog::warn("{}", dec_json["status"]);
-
+int __fastcall json_decode(DWORD data) {
+	int result = o_json_decode(data);
+	if (is_replace_next) {
+		is_replace_next = false;
+		strcpy(*reinterpret_cast<char**>(data + 0x4C), "{}");
+	}
+	
+	spdlog::warn("{}", *reinterpret_cast<char**>(data + 0x4C));
 	return result;
 }
 
@@ -112,16 +140,16 @@ void hook() {
 		}
 		auto hook = new HOOK_DETOUR;
 		auto handle_web = GetModuleHandle(L"Web.dll");
-		spdlog::info("Web {}", int((BYTE*)handle_web + 0x33A90));
+		spdlog::info("Web {}", int((BYTE*)handle_web + 0x334F0));
 		hook = new HOOK_DETOUR;
-		auto h_json_encode = ((BYTE*)handle_web + 0x33A90);
+		auto h_json_encode = ((BYTE*)handle_web + 0x334F0);
 		hook->SetupHook((BYTE*)h_json_encode, (BYTE*)&json_encode); //can cast to byte* to
 		hook->Hook();
 		o_json_encode = hook->GetOriginal<t_json_encode>();
 
 		
 		hook = new HOOK_DETOUR;
-		auto h_json_decode = ((BYTE*)handle_web + 0x35440);
+		auto h_json_decode = ((BYTE*)handle_web + 0x35100);
 		hook->SetupHook((BYTE*)h_json_decode, (BYTE*)&json_decode); //can cast to byte* to
 		hook->Hook();
 		o_json_decode = hook->GetOriginal<t_json_decode>();

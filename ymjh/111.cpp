@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 头文件
 #include <Windows.h>
+#include "hook_ymjh.h"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -14,268 +15,279 @@
 #pragma comment(linker, "/EXPORT:AllocateAndGetInterfaceInfoFromStack=_AheadLib_AllocateAndGetInterfaceInfoFromStack,@2")
 #pragma comment(linker, "/EXPORT:AllocateAndGetIpAddrTableFromStack=_AheadLib_AllocateAndGetIpAddrTableFromStack,@3")
 #pragma comment(linker, "/EXPORT:CancelIPChangeNotify=_AheadLib_CancelIPChangeNotify,@4")
-#pragma comment(linker, "/EXPORT:CancelMibChangeNotify2=_AheadLib_CancelMibChangeNotify2,@5")
-#pragma comment(linker, "/EXPORT:CloseCompartment=_AheadLib_CloseCompartment,@6")
-#pragma comment(linker, "/EXPORT:CloseGetIPPhysicalInterfaceForDestination=_AheadLib_CloseGetIPPhysicalInterfaceForDestination,@7")
-#pragma comment(linker, "/EXPORT:ConvertCompartmentGuidToId=_AheadLib_ConvertCompartmentGuidToId,@8")
-#pragma comment(linker, "/EXPORT:ConvertCompartmentIdToGuid=_AheadLib_ConvertCompartmentIdToGuid,@9")
-#pragma comment(linker, "/EXPORT:ConvertGuidToStringA=_AheadLib_ConvertGuidToStringA,@10")
-#pragma comment(linker, "/EXPORT:ConvertGuidToStringW=_AheadLib_ConvertGuidToStringW,@11")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceAliasToLuid=_AheadLib_ConvertInterfaceAliasToLuid,@12")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceGuidToLuid=_AheadLib_ConvertInterfaceGuidToLuid,@13")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceIndexToLuid=_AheadLib_ConvertInterfaceIndexToLuid,@14")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToAlias=_AheadLib_ConvertInterfaceLuidToAlias,@15")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToGuid=_AheadLib_ConvertInterfaceLuidToGuid,@16")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToIndex=_AheadLib_ConvertInterfaceLuidToIndex,@17")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToNameA=_AheadLib_ConvertInterfaceLuidToNameA,@18")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToNameW=_AheadLib_ConvertInterfaceLuidToNameW,@19")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceNameToLuidA=_AheadLib_ConvertInterfaceNameToLuidA,@20")
-#pragma comment(linker, "/EXPORT:ConvertInterfaceNameToLuidW=_AheadLib_ConvertInterfaceNameToLuidW,@21")
-#pragma comment(linker, "/EXPORT:ConvertInterfacePhysicalAddressToLuid=_AheadLib_ConvertInterfacePhysicalAddressToLuid,@22")
-#pragma comment(linker, "/EXPORT:ConvertIpv4MaskToLength=_AheadLib_ConvertIpv4MaskToLength,@23")
-#pragma comment(linker, "/EXPORT:ConvertLengthToIpv4Mask=_AheadLib_ConvertLengthToIpv4Mask,@24")
-#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceAliasToLuid=_AheadLib_ConvertRemoteInterfaceAliasToLuid,@25")
-#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceGuidToLuid=_AheadLib_ConvertRemoteInterfaceGuidToLuid,@26")
-#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceIndexToLuid=_AheadLib_ConvertRemoteInterfaceIndexToLuid,@27")
-#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceLuidToAlias=_AheadLib_ConvertRemoteInterfaceLuidToAlias,@28")
-#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceLuidToGuid=_AheadLib_ConvertRemoteInterfaceLuidToGuid,@29")
-#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceLuidToIndex=_AheadLib_ConvertRemoteInterfaceLuidToIndex,@30")
-#pragma comment(linker, "/EXPORT:ConvertStringToGuidA=_AheadLib_ConvertStringToGuidA,@31")
-#pragma comment(linker, "/EXPORT:ConvertStringToGuidW=_AheadLib_ConvertStringToGuidW,@32")
-#pragma comment(linker, "/EXPORT:ConvertStringToInterfacePhysicalAddress=_AheadLib_ConvertStringToInterfacePhysicalAddress,@33")
-#pragma comment(linker, "/EXPORT:CreateAnycastIpAddressEntry=_AheadLib_CreateAnycastIpAddressEntry,@34")
-#pragma comment(linker, "/EXPORT:CreateCompartment=_AheadLib_CreateCompartment,@35")
-#pragma comment(linker, "/EXPORT:CreateIpForwardEntry2=_AheadLib_CreateIpForwardEntry2,@36")
-#pragma comment(linker, "/EXPORT:CreateIpForwardEntry=_AheadLib_CreateIpForwardEntry,@37")
-#pragma comment(linker, "/EXPORT:CreateIpNetEntry2=_AheadLib_CreateIpNetEntry2,@38")
-#pragma comment(linker, "/EXPORT:CreateIpNetEntry=_AheadLib_CreateIpNetEntry,@39")
-#pragma comment(linker, "/EXPORT:CreatePersistentTcpPortReservation=_AheadLib_CreatePersistentTcpPortReservation,@40")
-#pragma comment(linker, "/EXPORT:CreatePersistentUdpPortReservation=_AheadLib_CreatePersistentUdpPortReservation,@41")
-#pragma comment(linker, "/EXPORT:CreateProxyArpEntry=_AheadLib_CreateProxyArpEntry,@42")
-#pragma comment(linker, "/EXPORT:CreateSortedAddressPairs=_AheadLib_CreateSortedAddressPairs,@43")
-#pragma comment(linker, "/EXPORT:CreateUnicastIpAddressEntry=_AheadLib_CreateUnicastIpAddressEntry,@44")
-#pragma comment(linker, "/EXPORT:DeleteAnycastIpAddressEntry=_AheadLib_DeleteAnycastIpAddressEntry,@45")
-#pragma comment(linker, "/EXPORT:DeleteCompartment=_AheadLib_DeleteCompartment,@46")
-#pragma comment(linker, "/EXPORT:DeleteIPAddress=_AheadLib_DeleteIPAddress,@47")
-#pragma comment(linker, "/EXPORT:DeleteIpForwardEntry2=_AheadLib_DeleteIpForwardEntry2,@48")
-#pragma comment(linker, "/EXPORT:DeleteIpForwardEntry=_AheadLib_DeleteIpForwardEntry,@49")
-#pragma comment(linker, "/EXPORT:DeleteIpNetEntry2=_AheadLib_DeleteIpNetEntry2,@50")
-#pragma comment(linker, "/EXPORT:DeleteIpNetEntry=_AheadLib_DeleteIpNetEntry,@51")
-#pragma comment(linker, "/EXPORT:DeletePersistentTcpPortReservation=_AheadLib_DeletePersistentTcpPortReservation,@52")
-#pragma comment(linker, "/EXPORT:DeletePersistentUdpPortReservation=_AheadLib_DeletePersistentUdpPortReservation,@53")
-#pragma comment(linker, "/EXPORT:DeleteProxyArpEntry=_AheadLib_DeleteProxyArpEntry,@54")
-#pragma comment(linker, "/EXPORT:DeleteUnicastIpAddressEntry=_AheadLib_DeleteUnicastIpAddressEntry,@55")
-#pragma comment(linker, "/EXPORT:DisableMediaSense=_AheadLib_DisableMediaSense,@56")
-#pragma comment(linker, "/EXPORT:EnableRouter=_AheadLib_EnableRouter,@57")
-#pragma comment(linker, "/EXPORT:FlushIpNetTable2=_AheadLib_FlushIpNetTable2,@58")
-#pragma comment(linker, "/EXPORT:FlushIpNetTable=_AheadLib_FlushIpNetTable,@59")
-#pragma comment(linker, "/EXPORT:FlushIpPathTable=_AheadLib_FlushIpPathTable,@60")
-#pragma comment(linker, "/EXPORT:FreeMibTable=_AheadLib_FreeMibTable,@61")
-#pragma comment(linker, "/EXPORT:GetAdapterIndex=_AheadLib_GetAdapterIndex,@62")
-#pragma comment(linker, "/EXPORT:GetAdapterOrderMap=_AheadLib_GetAdapterOrderMap,@63")
-#pragma comment(linker, "/EXPORT:GetAdaptersAddresses=_AheadLib_GetAdaptersAddresses,@64")
-#pragma comment(linker, "/EXPORT:GetAdaptersInfo=_AheadLib_GetAdaptersInfo,@65")
-#pragma comment(linker, "/EXPORT:GetAnycastIpAddressEntry=_AheadLib_GetAnycastIpAddressEntry,@66")
-#pragma comment(linker, "/EXPORT:GetAnycastIpAddressTable=_AheadLib_GetAnycastIpAddressTable,@67")
-#pragma comment(linker, "/EXPORT:GetBestInterface=_AheadLib_GetBestInterface,@68")
-#pragma comment(linker, "/EXPORT:GetBestInterfaceEx=_AheadLib_GetBestInterfaceEx,@69")
-#pragma comment(linker, "/EXPORT:GetBestRoute2=_AheadLib_GetBestRoute2,@70")
-#pragma comment(linker, "/EXPORT:GetBestRoute=_AheadLib_GetBestRoute,@71")
-#pragma comment(linker, "/EXPORT:GetCurrentThreadCompartmentId=_AheadLib_GetCurrentThreadCompartmentId,@72")
-#pragma comment(linker, "/EXPORT:GetCurrentThreadCompartmentScope=_AheadLib_GetCurrentThreadCompartmentScope,@73")
-#pragma comment(linker, "/EXPORT:GetDefaultCompartmentId=_AheadLib_GetDefaultCompartmentId,@74")
-#pragma comment(linker, "/EXPORT:GetExtendedTcpTable=_AheadLib_GetExtendedTcpTable,@75")
-#pragma comment(linker, "/EXPORT:GetExtendedUdpTable=_AheadLib_GetExtendedUdpTable,@76")
-#pragma comment(linker, "/EXPORT:GetFriendlyIfIndex=_AheadLib_GetFriendlyIfIndex,@77")
-#pragma comment(linker, "/EXPORT:GetIcmpStatistics=_AheadLib_GetIcmpStatistics,@78")
-#pragma comment(linker, "/EXPORT:GetIcmpStatisticsEx=_AheadLib_GetIcmpStatisticsEx,@79")
-#pragma comment(linker, "/EXPORT:GetIfEntry2=_AheadLib_GetIfEntry2,@80")
-#pragma comment(linker, "/EXPORT:GetIfEntry2Ex=_AheadLib_GetIfEntry2Ex,@81")
-#pragma comment(linker, "/EXPORT:GetIfEntry=_AheadLib_GetIfEntry,@82")
-#pragma comment(linker, "/EXPORT:GetIfStackTable=_AheadLib_GetIfStackTable,@83")
-#pragma comment(linker, "/EXPORT:GetIfTable2=_AheadLib_GetIfTable2,@84")
-#pragma comment(linker, "/EXPORT:GetIfTable2Ex=_AheadLib_GetIfTable2Ex,@85")
-#pragma comment(linker, "/EXPORT:GetIfTable=_AheadLib_GetIfTable,@86")
-#pragma comment(linker, "/EXPORT:GetInterfaceCompartmentId=_AheadLib_GetInterfaceCompartmentId,@87")
-#pragma comment(linker, "/EXPORT:GetInterfaceInfo=_AheadLib_GetInterfaceInfo,@88")
-#pragma comment(linker, "/EXPORT:GetInvertedIfStackTable=_AheadLib_GetInvertedIfStackTable,@89")
-#pragma comment(linker, "/EXPORT:GetIpAddrTable=_AheadLib_GetIpAddrTable,@90")
-#pragma comment(linker, "/EXPORT:GetIpErrorString=_AheadLib_GetIpErrorString,@91")
-#pragma comment(linker, "/EXPORT:GetIpForwardEntry2=_AheadLib_GetIpForwardEntry2,@92")
-#pragma comment(linker, "/EXPORT:GetIpForwardTable2=_AheadLib_GetIpForwardTable2,@93")
-#pragma comment(linker, "/EXPORT:GetIpForwardTable=_AheadLib_GetIpForwardTable,@94")
-#pragma comment(linker, "/EXPORT:GetIpInterfaceEntry=_AheadLib_GetIpInterfaceEntry,@95")
-#pragma comment(linker, "/EXPORT:GetIpInterfaceTable=_AheadLib_GetIpInterfaceTable,@96")
-#pragma comment(linker, "/EXPORT:GetIpNetEntry2=_AheadLib_GetIpNetEntry2,@97")
-#pragma comment(linker, "/EXPORT:GetIpNetTable2=_AheadLib_GetIpNetTable2,@98")
-#pragma comment(linker, "/EXPORT:GetIpNetTable=_AheadLib_GetIpNetTable,@99")
-#pragma comment(linker, "/EXPORT:GetIpNetworkConnectionBandwidthEstimates=_AheadLib_GetIpNetworkConnectionBandwidthEstimates,@100")
-#pragma comment(linker, "/EXPORT:GetIpPathEntry=_AheadLib_GetIpPathEntry,@101")
-#pragma comment(linker, "/EXPORT:GetIpPathTable=_AheadLib_GetIpPathTable,@102")
-#pragma comment(linker, "/EXPORT:GetIpStatistics=_AheadLib_GetIpStatistics,@103")
-#pragma comment(linker, "/EXPORT:GetIpStatisticsEx=_AheadLib_GetIpStatisticsEx,@104")
-#pragma comment(linker, "/EXPORT:GetJobCompartmentId=_AheadLib_GetJobCompartmentId,@105")
-#pragma comment(linker, "/EXPORT:GetMulticastIpAddressEntry=_AheadLib_GetMulticastIpAddressEntry,@106")
-#pragma comment(linker, "/EXPORT:GetMulticastIpAddressTable=_AheadLib_GetMulticastIpAddressTable,@107")
-#pragma comment(linker, "/EXPORT:GetNetworkInformation=_AheadLib_GetNetworkInformation,@108")
-#pragma comment(linker, "/EXPORT:GetNetworkParams=_AheadLib_GetNetworkParams,@109")
-#pragma comment(linker, "/EXPORT:GetNumberOfInterfaces=_AheadLib_GetNumberOfInterfaces,@110")
-#pragma comment(linker, "/EXPORT:GetOwnerModuleFromPidAndInfo=_AheadLib_GetOwnerModuleFromPidAndInfo,@111")
-#pragma comment(linker, "/EXPORT:GetOwnerModuleFromTcp6Entry=_AheadLib_GetOwnerModuleFromTcp6Entry,@112")
-#pragma comment(linker, "/EXPORT:GetOwnerModuleFromTcpEntry=_AheadLib_GetOwnerModuleFromTcpEntry,@113")
-#pragma comment(linker, "/EXPORT:GetOwnerModuleFromUdp6Entry=_AheadLib_GetOwnerModuleFromUdp6Entry,@114")
-#pragma comment(linker, "/EXPORT:GetOwnerModuleFromUdpEntry=_AheadLib_GetOwnerModuleFromUdpEntry,@115")
-#pragma comment(linker, "/EXPORT:GetPerAdapterInfo=_AheadLib_GetPerAdapterInfo,@116")
-#pragma comment(linker, "/EXPORT:GetPerTcp6ConnectionEStats=_AheadLib_GetPerTcp6ConnectionEStats,@117")
-#pragma comment(linker, "/EXPORT:GetPerTcp6ConnectionStats=_AheadLib_GetPerTcp6ConnectionStats,@118")
-#pragma comment(linker, "/EXPORT:GetPerTcpConnectionEStats=_AheadLib_GetPerTcpConnectionEStats,@119")
-#pragma comment(linker, "/EXPORT:GetPerTcpConnectionStats=_AheadLib_GetPerTcpConnectionStats,@120")
-#pragma comment(linker, "/EXPORT:GetRTTAndHopCount=_AheadLib_GetRTTAndHopCount,@121")
-#pragma comment(linker, "/EXPORT:GetSessionCompartmentId=_AheadLib_GetSessionCompartmentId,@122")
-#pragma comment(linker, "/EXPORT:GetTcp6Table2=_AheadLib_GetTcp6Table2,@123")
-#pragma comment(linker, "/EXPORT:GetTcp6Table=_AheadLib_GetTcp6Table,@124")
-#pragma comment(linker, "/EXPORT:GetTcpStatistics=_AheadLib_GetTcpStatistics,@125")
-#pragma comment(linker, "/EXPORT:GetTcpStatisticsEx2=_AheadLib_GetTcpStatisticsEx2,@126")
-#pragma comment(linker, "/EXPORT:GetTcpStatisticsEx=_AheadLib_GetTcpStatisticsEx,@127")
-#pragma comment(linker, "/EXPORT:GetTcpTable2=_AheadLib_GetTcpTable2,@128")
-#pragma comment(linker, "/EXPORT:GetTcpTable=_AheadLib_GetTcpTable,@129")
-#pragma comment(linker, "/EXPORT:GetTeredoPort=_AheadLib_GetTeredoPort,@130")
-#pragma comment(linker, "/EXPORT:GetUdp6Table=_AheadLib_GetUdp6Table,@131")
-#pragma comment(linker, "/EXPORT:GetUdpStatistics=_AheadLib_GetUdpStatistics,@132")
-#pragma comment(linker, "/EXPORT:GetUdpStatisticsEx2=_AheadLib_GetUdpStatisticsEx2,@133")
-#pragma comment(linker, "/EXPORT:GetUdpStatisticsEx=_AheadLib_GetUdpStatisticsEx,@134")
-#pragma comment(linker, "/EXPORT:GetUdpTable=_AheadLib_GetUdpTable,@135")
-#pragma comment(linker, "/EXPORT:GetUniDirectionalAdapterInfo=_AheadLib_GetUniDirectionalAdapterInfo,@136")
-#pragma comment(linker, "/EXPORT:GetUnicastIpAddressEntry=_AheadLib_GetUnicastIpAddressEntry,@137")
-#pragma comment(linker, "/EXPORT:GetUnicastIpAddressTable=_AheadLib_GetUnicastIpAddressTable,@138")
-#pragma comment(linker, "/EXPORT:GetWPAOACSupportLevel=_AheadLib_GetWPAOACSupportLevel,@139")
-#pragma comment(linker, "/EXPORT:Icmp6CreateFile=_AheadLib_Icmp6CreateFile,@140")
-#pragma comment(linker, "/EXPORT:Icmp6ParseReplies=_AheadLib_Icmp6ParseReplies,@141")
-#pragma comment(linker, "/EXPORT:Icmp6SendEcho2=_AheadLib_Icmp6SendEcho2,@142")
-#pragma comment(linker, "/EXPORT:IcmpCloseHandle=_AheadLib_IcmpCloseHandle,@143")
-#pragma comment(linker, "/EXPORT:IcmpCreateFile=_AheadLib_IcmpCreateFile,@144")
-#pragma comment(linker, "/EXPORT:IcmpParseReplies=_AheadLib_IcmpParseReplies,@145")
-#pragma comment(linker, "/EXPORT:IcmpSendEcho2=_AheadLib_IcmpSendEcho2,@146")
-#pragma comment(linker, "/EXPORT:IcmpSendEcho2Ex=_AheadLib_IcmpSendEcho2Ex,@147")
-#pragma comment(linker, "/EXPORT:IcmpSendEcho=_AheadLib_IcmpSendEcho,@148")
-#pragma comment(linker, "/EXPORT:InitializeCompartmentEntry=_AheadLib_InitializeCompartmentEntry,@149")
-#pragma comment(linker, "/EXPORT:InitializeIpForwardEntry=_AheadLib_InitializeIpForwardEntry,@150")
-#pragma comment(linker, "/EXPORT:InitializeIpInterfaceEntry=_AheadLib_InitializeIpInterfaceEntry,@151")
-#pragma comment(linker, "/EXPORT:InitializeUnicastIpAddressEntry=_AheadLib_InitializeUnicastIpAddressEntry,@152")
-#pragma comment(linker, "/EXPORT:InternalCleanupPersistentStore=_AheadLib_InternalCleanupPersistentStore,@153")
-#pragma comment(linker, "/EXPORT:InternalCreateAnycastIpAddressEntry=_AheadLib_InternalCreateAnycastIpAddressEntry,@154")
-#pragma comment(linker, "/EXPORT:InternalCreateIpForwardEntry2=_AheadLib_InternalCreateIpForwardEntry2,@155")
-#pragma comment(linker, "/EXPORT:InternalCreateIpForwardEntry=_AheadLib_InternalCreateIpForwardEntry,@156")
-#pragma comment(linker, "/EXPORT:InternalCreateIpNetEntry2=_AheadLib_InternalCreateIpNetEntry2,@157")
-#pragma comment(linker, "/EXPORT:InternalCreateIpNetEntry=_AheadLib_InternalCreateIpNetEntry,@158")
-#pragma comment(linker, "/EXPORT:InternalCreateUnicastIpAddressEntry=_AheadLib_InternalCreateUnicastIpAddressEntry,@159")
-#pragma comment(linker, "/EXPORT:InternalDeleteAnycastIpAddressEntry=_AheadLib_InternalDeleteAnycastIpAddressEntry,@160")
-#pragma comment(linker, "/EXPORT:InternalDeleteIpForwardEntry2=_AheadLib_InternalDeleteIpForwardEntry2,@161")
-#pragma comment(linker, "/EXPORT:InternalDeleteIpForwardEntry=_AheadLib_InternalDeleteIpForwardEntry,@162")
-#pragma comment(linker, "/EXPORT:InternalDeleteIpNetEntry2=_AheadLib_InternalDeleteIpNetEntry2,@163")
-#pragma comment(linker, "/EXPORT:InternalDeleteIpNetEntry=_AheadLib_InternalDeleteIpNetEntry,@164")
-#pragma comment(linker, "/EXPORT:InternalDeleteUnicastIpAddressEntry=_AheadLib_InternalDeleteUnicastIpAddressEntry,@165")
-#pragma comment(linker, "/EXPORT:InternalFindInterfaceByAddress=_AheadLib_InternalFindInterfaceByAddress,@166")
-#pragma comment(linker, "/EXPORT:InternalGetAnycastIpAddressEntry=_AheadLib_InternalGetAnycastIpAddressEntry,@167")
-#pragma comment(linker, "/EXPORT:InternalGetAnycastIpAddressTable=_AheadLib_InternalGetAnycastIpAddressTable,@168")
-#pragma comment(linker, "/EXPORT:InternalGetBoundTcp6EndpointTable=_AheadLib_InternalGetBoundTcp6EndpointTable,@169")
-#pragma comment(linker, "/EXPORT:InternalGetBoundTcpEndpointTable=_AheadLib_InternalGetBoundTcpEndpointTable,@170")
-#pragma comment(linker, "/EXPORT:InternalGetForwardIpTable2=_AheadLib_InternalGetForwardIpTable2,@171")
-#pragma comment(linker, "/EXPORT:InternalGetIPPhysicalInterfaceForDestination=_AheadLib_InternalGetIPPhysicalInterfaceForDestination,@172")
-#pragma comment(linker, "/EXPORT:InternalGetIfEntry2=_AheadLib_InternalGetIfEntry2,@173")
-#pragma comment(linker, "/EXPORT:InternalGetIfTable2=_AheadLib_InternalGetIfTable2,@174")
-#pragma comment(linker, "/EXPORT:InternalGetIfTable=_AheadLib_InternalGetIfTable,@175")
-#pragma comment(linker, "/EXPORT:InternalGetIpAddrTable=_AheadLib_InternalGetIpAddrTable,@176")
-#pragma comment(linker, "/EXPORT:InternalGetIpForwardEntry2=_AheadLib_InternalGetIpForwardEntry2,@177")
-#pragma comment(linker, "/EXPORT:InternalGetIpForwardTable=_AheadLib_InternalGetIpForwardTable,@178")
-#pragma comment(linker, "/EXPORT:InternalGetIpInterfaceEntry=_AheadLib_InternalGetIpInterfaceEntry,@179")
-#pragma comment(linker, "/EXPORT:InternalGetIpInterfaceTable=_AheadLib_InternalGetIpInterfaceTable,@180")
-#pragma comment(linker, "/EXPORT:InternalGetIpNetEntry2=_AheadLib_InternalGetIpNetEntry2,@181")
-#pragma comment(linker, "/EXPORT:InternalGetIpNetTable2=_AheadLib_InternalGetIpNetTable2,@182")
-#pragma comment(linker, "/EXPORT:InternalGetIpNetTable=_AheadLib_InternalGetIpNetTable,@183")
-#pragma comment(linker, "/EXPORT:InternalGetMulticastIpAddressEntry=_AheadLib_InternalGetMulticastIpAddressEntry,@184")
-#pragma comment(linker, "/EXPORT:InternalGetMulticastIpAddressTable=_AheadLib_InternalGetMulticastIpAddressTable,@185")
-#pragma comment(linker, "/EXPORT:InternalGetRtcSlotInformation=_AheadLib_InternalGetRtcSlotInformation,@186")
-#pragma comment(linker, "/EXPORT:InternalGetTcp6Table2=_AheadLib_InternalGetTcp6Table2,@187")
-#pragma comment(linker, "/EXPORT:InternalGetTcp6TableWithOwnerModule=_AheadLib_InternalGetTcp6TableWithOwnerModule,@188")
-#pragma comment(linker, "/EXPORT:InternalGetTcp6TableWithOwnerPid=_AheadLib_InternalGetTcp6TableWithOwnerPid,@189")
-#pragma comment(linker, "/EXPORT:InternalGetTcpTable2=_AheadLib_InternalGetTcpTable2,@190")
-#pragma comment(linker, "/EXPORT:InternalGetTcpTable=_AheadLib_InternalGetTcpTable,@191")
-#pragma comment(linker, "/EXPORT:InternalGetTcpTableEx=_AheadLib_InternalGetTcpTableEx,@192")
-#pragma comment(linker, "/EXPORT:InternalGetTcpTableWithOwnerModule=_AheadLib_InternalGetTcpTableWithOwnerModule,@193")
-#pragma comment(linker, "/EXPORT:InternalGetTcpTableWithOwnerPid=_AheadLib_InternalGetTcpTableWithOwnerPid,@194")
-#pragma comment(linker, "/EXPORT:InternalGetTunnelPhysicalAdapter=_AheadLib_InternalGetTunnelPhysicalAdapter,@195")
-#pragma comment(linker, "/EXPORT:InternalGetUdp6TableWithOwnerModule=_AheadLib_InternalGetUdp6TableWithOwnerModule,@196")
-#pragma comment(linker, "/EXPORT:InternalGetUdp6TableWithOwnerPid=_AheadLib_InternalGetUdp6TableWithOwnerPid,@197")
-#pragma comment(linker, "/EXPORT:InternalGetUdpTable=_AheadLib_InternalGetUdpTable,@198")
-#pragma comment(linker, "/EXPORT:InternalGetUdpTableEx=_AheadLib_InternalGetUdpTableEx,@199")
-#pragma comment(linker, "/EXPORT:InternalGetUdpTableWithOwnerModule=_AheadLib_InternalGetUdpTableWithOwnerModule,@200")
-#pragma comment(linker, "/EXPORT:InternalGetUdpTableWithOwnerPid=_AheadLib_InternalGetUdpTableWithOwnerPid,@201")
-#pragma comment(linker, "/EXPORT:InternalGetUnicastIpAddressEntry=_AheadLib_InternalGetUnicastIpAddressEntry,@202")
-#pragma comment(linker, "/EXPORT:InternalGetUnicastIpAddressTable=_AheadLib_InternalGetUnicastIpAddressTable,@203")
-#pragma comment(linker, "/EXPORT:InternalIcmpCreateFileEx=_AheadLib_InternalIcmpCreateFileEx,@204")
-#pragma comment(linker, "/EXPORT:InternalSetIfEntry=_AheadLib_InternalSetIfEntry,@205")
-#pragma comment(linker, "/EXPORT:InternalSetIpForwardEntry2=_AheadLib_InternalSetIpForwardEntry2,@206")
-#pragma comment(linker, "/EXPORT:InternalSetIpForwardEntry=_AheadLib_InternalSetIpForwardEntry,@207")
-#pragma comment(linker, "/EXPORT:InternalSetIpInterfaceEntry=_AheadLib_InternalSetIpInterfaceEntry,@208")
-#pragma comment(linker, "/EXPORT:InternalSetIpNetEntry2=_AheadLib_InternalSetIpNetEntry2,@209")
-#pragma comment(linker, "/EXPORT:InternalSetIpNetEntry=_AheadLib_InternalSetIpNetEntry,@210")
-#pragma comment(linker, "/EXPORT:InternalSetIpStats=_AheadLib_InternalSetIpStats,@211")
-#pragma comment(linker, "/EXPORT:InternalSetTcpEntry=_AheadLib_InternalSetTcpEntry,@212")
-#pragma comment(linker, "/EXPORT:InternalSetTeredoPort=_AheadLib_InternalSetTeredoPort,@213")
-#pragma comment(linker, "/EXPORT:InternalSetUnicastIpAddressEntry=_AheadLib_InternalSetUnicastIpAddressEntry,@214")
-#pragma comment(linker, "/EXPORT:IpReleaseAddress=_AheadLib_IpReleaseAddress,@215")
-#pragma comment(linker, "/EXPORT:IpRenewAddress=_AheadLib_IpRenewAddress,@216")
-#pragma comment(linker, "/EXPORT:LookupPersistentTcpPortReservation=_AheadLib_LookupPersistentTcpPortReservation,@217")
-#pragma comment(linker, "/EXPORT:LookupPersistentUdpPortReservation=_AheadLib_LookupPersistentUdpPortReservation,@218")
-#pragma comment(linker, "/EXPORT:NTPTimeToNTFileTime=_AheadLib_NTPTimeToNTFileTime,@219")
-#pragma comment(linker, "/EXPORT:NTTimeToNTPTime=_AheadLib_NTTimeToNTPTime,@220")
-#pragma comment(linker, "/EXPORT:NhGetGuidFromInterfaceName=_AheadLib_NhGetGuidFromInterfaceName,@221")
-#pragma comment(linker, "/EXPORT:NhGetInterfaceDescriptionFromGuid=_AheadLib_NhGetInterfaceDescriptionFromGuid,@222")
-#pragma comment(linker, "/EXPORT:NhGetInterfaceNameFromDeviceGuid=_AheadLib_NhGetInterfaceNameFromDeviceGuid,@223")
-#pragma comment(linker, "/EXPORT:NhGetInterfaceNameFromGuid=_AheadLib_NhGetInterfaceNameFromGuid,@224")
-#pragma comment(linker, "/EXPORT:NhpAllocateAndGetInterfaceInfoFromStack=_AheadLib_NhpAllocateAndGetInterfaceInfoFromStack,@225")
-#pragma comment(linker, "/EXPORT:NotifyAddrChange=_AheadLib_NotifyAddrChange,@226")
-#pragma comment(linker, "/EXPORT:NotifyCompartmentChange=_AheadLib_NotifyCompartmentChange,@227")
-#pragma comment(linker, "/EXPORT:NotifyIpInterfaceChange=_AheadLib_NotifyIpInterfaceChange,@228")
-#pragma comment(linker, "/EXPORT:NotifyRouteChange2=_AheadLib_NotifyRouteChange2,@229")
-#pragma comment(linker, "/EXPORT:NotifyRouteChange=_AheadLib_NotifyRouteChange,@230")
-#pragma comment(linker, "/EXPORT:NotifyStableUnicastIpAddressTable=_AheadLib_NotifyStableUnicastIpAddressTable,@231")
-#pragma comment(linker, "/EXPORT:NotifyTeredoPortChange=_AheadLib_NotifyTeredoPortChange,@232")
-#pragma comment(linker, "/EXPORT:NotifyUnicastIpAddressChange=_AheadLib_NotifyUnicastIpAddressChange,@233")
-#pragma comment(linker, "/EXPORT:OpenCompartment=_AheadLib_OpenCompartment,@234")
-#pragma comment(linker, "/EXPORT:ParseNetworkString=_AheadLib_ParseNetworkString,@235")
-#pragma comment(linker, "/EXPORT:ResolveIpNetEntry2=_AheadLib_ResolveIpNetEntry2,@252")
-#pragma comment(linker, "/EXPORT:ResolveNeighbor=_AheadLib_ResolveNeighbor,@253")
-#pragma comment(linker, "/EXPORT:RestoreMediaSense=_AheadLib_RestoreMediaSense,@254")
-#pragma comment(linker, "/EXPORT:SendARP=_AheadLib_SendARP,@255")
-#pragma comment(linker, "/EXPORT:SetAdapterIpAddress=_AheadLib_SetAdapterIpAddress,@256")
-#pragma comment(linker, "/EXPORT:SetCurrentThreadCompartmentId=_AheadLib_SetCurrentThreadCompartmentId,@257")
-#pragma comment(linker, "/EXPORT:SetCurrentThreadCompartmentScope=_AheadLib_SetCurrentThreadCompartmentScope,@258")
-#pragma comment(linker, "/EXPORT:SetIfEntry=_AheadLib_SetIfEntry,@259")
-#pragma comment(linker, "/EXPORT:SetIpForwardEntry2=_AheadLib_SetIpForwardEntry2,@260")
-#pragma comment(linker, "/EXPORT:SetIpForwardEntry=_AheadLib_SetIpForwardEntry,@261")
-#pragma comment(linker, "/EXPORT:SetIpInterfaceEntry=_AheadLib_SetIpInterfaceEntry,@262")
-#pragma comment(linker, "/EXPORT:SetIpNetEntry2=_AheadLib_SetIpNetEntry2,@263")
-#pragma comment(linker, "/EXPORT:SetIpNetEntry=_AheadLib_SetIpNetEntry,@264")
-#pragma comment(linker, "/EXPORT:SetIpStatistics=_AheadLib_SetIpStatistics,@265")
-#pragma comment(linker, "/EXPORT:SetIpStatisticsEx=_AheadLib_SetIpStatisticsEx,@266")
-#pragma comment(linker, "/EXPORT:SetIpTTL=_AheadLib_SetIpTTL,@267")
-#pragma comment(linker, "/EXPORT:SetJobCompartmentId=_AheadLib_SetJobCompartmentId,@268")
-#pragma comment(linker, "/EXPORT:SetNetworkInformation=_AheadLib_SetNetworkInformation,@269")
-#pragma comment(linker, "/EXPORT:SetPerTcp6ConnectionEStats=_AheadLib_SetPerTcp6ConnectionEStats,@270")
-#pragma comment(linker, "/EXPORT:SetPerTcp6ConnectionStats=_AheadLib_SetPerTcp6ConnectionStats,@271")
-#pragma comment(linker, "/EXPORT:SetPerTcpConnectionEStats=_AheadLib_SetPerTcpConnectionEStats,@272")
-#pragma comment(linker, "/EXPORT:SetPerTcpConnectionStats=_AheadLib_SetPerTcpConnectionStats,@273")
-#pragma comment(linker, "/EXPORT:SetSessionCompartmentId=_AheadLib_SetSessionCompartmentId,@274")
-#pragma comment(linker, "/EXPORT:SetTcpEntry=_AheadLib_SetTcpEntry,@275")
-#pragma comment(linker, "/EXPORT:SetUnicastIpAddressEntry=_AheadLib_SetUnicastIpAddressEntry,@276")
-#pragma comment(linker, "/EXPORT:UnenableRouter=_AheadLib_UnenableRouter,@277")
-#pragma comment(linker, "/EXPORT:do_echo_rep=_AheadLib_do_echo_rep,@278")
-#pragma comment(linker, "/EXPORT:do_echo_req=_AheadLib_do_echo_req,@279")
-#pragma comment(linker, "/EXPORT:if_indextoname=_AheadLib_if_indextoname,@280")
-#pragma comment(linker, "/EXPORT:if_nametoindex=_AheadLib_if_nametoindex,@281")
-#pragma comment(linker, "/EXPORT:register_icmp=_AheadLib_register_icmp,@282")
+#pragma comment(linker, "/EXPORT:CancelIfTimestampConfigChange=_AheadLib_CancelIfTimestampConfigChange,@5")
+#pragma comment(linker, "/EXPORT:CancelMibChangeNotify2=_AheadLib_CancelMibChangeNotify2,@6")
+#pragma comment(linker, "/EXPORT:CaptureInterfaceHardwareCrossTimestamp=_AheadLib_CaptureInterfaceHardwareCrossTimestamp,@7")
+#pragma comment(linker, "/EXPORT:CloseCompartment=_AheadLib_CloseCompartment,@8")
+#pragma comment(linker, "/EXPORT:CloseGetIPPhysicalInterfaceForDestination=_AheadLib_CloseGetIPPhysicalInterfaceForDestination,@9")
+#pragma comment(linker, "/EXPORT:ConvertCompartmentGuidToId=_AheadLib_ConvertCompartmentGuidToId,@10")
+#pragma comment(linker, "/EXPORT:ConvertCompartmentIdToGuid=_AheadLib_ConvertCompartmentIdToGuid,@11")
+#pragma comment(linker, "/EXPORT:ConvertGuidToStringA=_AheadLib_ConvertGuidToStringA,@12")
+#pragma comment(linker, "/EXPORT:ConvertGuidToStringW=_AheadLib_ConvertGuidToStringW,@13")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceAliasToLuid=_AheadLib_ConvertInterfaceAliasToLuid,@14")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceGuidToLuid=_AheadLib_ConvertInterfaceGuidToLuid,@15")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceIndexToLuid=_AheadLib_ConvertInterfaceIndexToLuid,@16")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToAlias=_AheadLib_ConvertInterfaceLuidToAlias,@17")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToGuid=_AheadLib_ConvertInterfaceLuidToGuid,@18")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToIndex=_AheadLib_ConvertInterfaceLuidToIndex,@19")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToNameA=_AheadLib_ConvertInterfaceLuidToNameA,@20")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceLuidToNameW=_AheadLib_ConvertInterfaceLuidToNameW,@21")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceNameToLuidA=_AheadLib_ConvertInterfaceNameToLuidA,@22")
+#pragma comment(linker, "/EXPORT:ConvertInterfaceNameToLuidW=_AheadLib_ConvertInterfaceNameToLuidW,@23")
+#pragma comment(linker, "/EXPORT:ConvertInterfacePhysicalAddressToLuid=_AheadLib_ConvertInterfacePhysicalAddressToLuid,@24")
+#pragma comment(linker, "/EXPORT:ConvertIpv4MaskToLength=_AheadLib_ConvertIpv4MaskToLength,@25")
+#pragma comment(linker, "/EXPORT:ConvertLengthToIpv4Mask=_AheadLib_ConvertLengthToIpv4Mask,@26")
+#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceAliasToLuid=_AheadLib_ConvertRemoteInterfaceAliasToLuid,@27")
+#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceGuidToLuid=_AheadLib_ConvertRemoteInterfaceGuidToLuid,@28")
+#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceIndexToLuid=_AheadLib_ConvertRemoteInterfaceIndexToLuid,@29")
+#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceLuidToAlias=_AheadLib_ConvertRemoteInterfaceLuidToAlias,@30")
+#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceLuidToGuid=_AheadLib_ConvertRemoteInterfaceLuidToGuid,@31")
+#pragma comment(linker, "/EXPORT:ConvertRemoteInterfaceLuidToIndex=_AheadLib_ConvertRemoteInterfaceLuidToIndex,@32")
+#pragma comment(linker, "/EXPORT:ConvertStringToGuidA=_AheadLib_ConvertStringToGuidA,@33")
+#pragma comment(linker, "/EXPORT:ConvertStringToGuidW=_AheadLib_ConvertStringToGuidW,@34")
+#pragma comment(linker, "/EXPORT:ConvertStringToInterfacePhysicalAddress=_AheadLib_ConvertStringToInterfacePhysicalAddress,@35")
+#pragma comment(linker, "/EXPORT:CreateAnycastIpAddressEntry=_AheadLib_CreateAnycastIpAddressEntry,@36")
+#pragma comment(linker, "/EXPORT:CreateCompartment=_AheadLib_CreateCompartment,@37")
+#pragma comment(linker, "/EXPORT:CreateIpForwardEntry2=_AheadLib_CreateIpForwardEntry2,@38")
+#pragma comment(linker, "/EXPORT:CreateIpForwardEntry=_AheadLib_CreateIpForwardEntry,@39")
+#pragma comment(linker, "/EXPORT:CreateIpNetEntry2=_AheadLib_CreateIpNetEntry2,@40")
+#pragma comment(linker, "/EXPORT:CreateIpNetEntry=_AheadLib_CreateIpNetEntry,@41")
+#pragma comment(linker, "/EXPORT:CreatePersistentTcpPortReservation=_AheadLib_CreatePersistentTcpPortReservation,@42")
+#pragma comment(linker, "/EXPORT:CreatePersistentUdpPortReservation=_AheadLib_CreatePersistentUdpPortReservation,@43")
+#pragma comment(linker, "/EXPORT:CreateProxyArpEntry=_AheadLib_CreateProxyArpEntry,@44")
+#pragma comment(linker, "/EXPORT:CreateSortedAddressPairs=_AheadLib_CreateSortedAddressPairs,@45")
+#pragma comment(linker, "/EXPORT:CreateUnicastIpAddressEntry=_AheadLib_CreateUnicastIpAddressEntry,@46")
+#pragma comment(linker, "/EXPORT:DeleteAnycastIpAddressEntry=_AheadLib_DeleteAnycastIpAddressEntry,@47")
+#pragma comment(linker, "/EXPORT:DeleteCompartment=_AheadLib_DeleteCompartment,@48")
+#pragma comment(linker, "/EXPORT:DeleteIPAddress=_AheadLib_DeleteIPAddress,@49")
+#pragma comment(linker, "/EXPORT:DeleteIpForwardEntry2=_AheadLib_DeleteIpForwardEntry2,@50")
+#pragma comment(linker, "/EXPORT:DeleteIpForwardEntry=_AheadLib_DeleteIpForwardEntry,@51")
+#pragma comment(linker, "/EXPORT:DeleteIpNetEntry2=_AheadLib_DeleteIpNetEntry2,@52")
+#pragma comment(linker, "/EXPORT:DeleteIpNetEntry=_AheadLib_DeleteIpNetEntry,@53")
+#pragma comment(linker, "/EXPORT:DeletePersistentTcpPortReservation=_AheadLib_DeletePersistentTcpPortReservation,@54")
+#pragma comment(linker, "/EXPORT:DeletePersistentUdpPortReservation=_AheadLib_DeletePersistentUdpPortReservation,@55")
+#pragma comment(linker, "/EXPORT:DeleteProxyArpEntry=_AheadLib_DeleteProxyArpEntry,@56")
+#pragma comment(linker, "/EXPORT:DeleteUnicastIpAddressEntry=_AheadLib_DeleteUnicastIpAddressEntry,@57")
+#pragma comment(linker, "/EXPORT:DisableMediaSense=_AheadLib_DisableMediaSense,@58")
+#pragma comment(linker, "/EXPORT:EnableRouter=_AheadLib_EnableRouter,@59")
+#pragma comment(linker, "/EXPORT:FlushIpNetTable2=_AheadLib_FlushIpNetTable2,@60")
+#pragma comment(linker, "/EXPORT:FlushIpNetTable=_AheadLib_FlushIpNetTable,@61")
+#pragma comment(linker, "/EXPORT:FlushIpPathTable=_AheadLib_FlushIpPathTable,@62")
+#pragma comment(linker, "/EXPORT:FreeDnsSettings=_AheadLib_FreeDnsSettings,@63")
+#pragma comment(linker, "/EXPORT:FreeInterfaceDnsSettings=_AheadLib_FreeInterfaceDnsSettings,@64")
+#pragma comment(linker, "/EXPORT:FreeMibTable=_AheadLib_FreeMibTable,@65")
+#pragma comment(linker, "/EXPORT:GetAdapterIndex=_AheadLib_GetAdapterIndex,@66")
+#pragma comment(linker, "/EXPORT:GetAdapterOrderMap=_AheadLib_GetAdapterOrderMap,@67")
+#pragma comment(linker, "/EXPORT:GetAdaptersAddresses=_AheadLib_GetAdaptersAddresses,@68")
+#pragma comment(linker, "/EXPORT:GetAdaptersInfo=_AheadLib_GetAdaptersInfo,@69")
+#pragma comment(linker, "/EXPORT:GetAnycastIpAddressEntry=_AheadLib_GetAnycastIpAddressEntry,@70")
+#pragma comment(linker, "/EXPORT:GetAnycastIpAddressTable=_AheadLib_GetAnycastIpAddressTable,@71")
+#pragma comment(linker, "/EXPORT:GetBestInterface=_AheadLib_GetBestInterface,@72")
+#pragma comment(linker, "/EXPORT:GetBestInterfaceEx=_AheadLib_GetBestInterfaceEx,@73")
+#pragma comment(linker, "/EXPORT:GetBestRoute2=_AheadLib_GetBestRoute2,@74")
+#pragma comment(linker, "/EXPORT:GetBestRoute=_AheadLib_GetBestRoute,@75")
+#pragma comment(linker, "/EXPORT:GetCurrentThreadCompartmentId=_AheadLib_GetCurrentThreadCompartmentId,@76")
+#pragma comment(linker, "/EXPORT:GetCurrentThreadCompartmentScope=_AheadLib_GetCurrentThreadCompartmentScope,@77")
+#pragma comment(linker, "/EXPORT:GetDefaultCompartmentId=_AheadLib_GetDefaultCompartmentId,@78")
+#pragma comment(linker, "/EXPORT:GetDnsSettings=_AheadLib_GetDnsSettings,@79")
+#pragma comment(linker, "/EXPORT:GetExtendedTcpTable=_AheadLib_GetExtendedTcpTable,@80")
+#pragma comment(linker, "/EXPORT:GetExtendedUdpTable=_AheadLib_GetExtendedUdpTable,@81")
+#pragma comment(linker, "/EXPORT:GetFriendlyIfIndex=_AheadLib_GetFriendlyIfIndex,@82")
+#pragma comment(linker, "/EXPORT:GetIcmpStatistics=_AheadLib_GetIcmpStatistics,@83")
+#pragma comment(linker, "/EXPORT:GetIcmpStatisticsEx=_AheadLib_GetIcmpStatisticsEx,@84")
+#pragma comment(linker, "/EXPORT:GetIfEntry2=_AheadLib_GetIfEntry2,@85")
+#pragma comment(linker, "/EXPORT:GetIfEntry2Ex=_AheadLib_GetIfEntry2Ex,@86")
+#pragma comment(linker, "/EXPORT:GetIfEntry=_AheadLib_GetIfEntry,@87")
+#pragma comment(linker, "/EXPORT:GetIfStackTable=_AheadLib_GetIfStackTable,@88")
+#pragma comment(linker, "/EXPORT:GetIfTable2=_AheadLib_GetIfTable2,@89")
+#pragma comment(linker, "/EXPORT:GetIfTable2Ex=_AheadLib_GetIfTable2Ex,@90")
+#pragma comment(linker, "/EXPORT:GetIfTable=_AheadLib_GetIfTable,@91")
+#pragma comment(linker, "/EXPORT:GetInterfaceCompartmentId=_AheadLib_GetInterfaceCompartmentId,@92")
+#pragma comment(linker, "/EXPORT:GetInterfaceCurrentTimestampCapabilities=_AheadLib_GetInterfaceCurrentTimestampCapabilities,@93")
+#pragma comment(linker, "/EXPORT:GetInterfaceDnsSettings=_AheadLib_GetInterfaceDnsSettings,@94")
+#pragma comment(linker, "/EXPORT:GetInterfaceHardwareTimestampCapabilities=_AheadLib_GetInterfaceHardwareTimestampCapabilities,@95")
+#pragma comment(linker, "/EXPORT:GetInterfaceInfo=_AheadLib_GetInterfaceInfo,@96")
+#pragma comment(linker, "/EXPORT:GetInvertedIfStackTable=_AheadLib_GetInvertedIfStackTable,@97")
+#pragma comment(linker, "/EXPORT:GetIpAddrTable=_AheadLib_GetIpAddrTable,@98")
+#pragma comment(linker, "/EXPORT:GetIpErrorString=_AheadLib_GetIpErrorString,@99")
+#pragma comment(linker, "/EXPORT:GetIpForwardEntry2=_AheadLib_GetIpForwardEntry2,@100")
+#pragma comment(linker, "/EXPORT:GetIpForwardTable2=_AheadLib_GetIpForwardTable2,@101")
+#pragma comment(linker, "/EXPORT:GetIpForwardTable=_AheadLib_GetIpForwardTable,@102")
+#pragma comment(linker, "/EXPORT:GetIpInterfaceEntry=_AheadLib_GetIpInterfaceEntry,@103")
+#pragma comment(linker, "/EXPORT:GetIpInterfaceTable=_AheadLib_GetIpInterfaceTable,@104")
+#pragma comment(linker, "/EXPORT:GetIpNetEntry2=_AheadLib_GetIpNetEntry2,@105")
+#pragma comment(linker, "/EXPORT:GetIpNetTable2=_AheadLib_GetIpNetTable2,@106")
+#pragma comment(linker, "/EXPORT:GetIpNetTable=_AheadLib_GetIpNetTable,@107")
+#pragma comment(linker, "/EXPORT:GetIpNetworkConnectionBandwidthEstimates=_AheadLib_GetIpNetworkConnectionBandwidthEstimates,@108")
+#pragma comment(linker, "/EXPORT:GetIpPathEntry=_AheadLib_GetIpPathEntry,@109")
+#pragma comment(linker, "/EXPORT:GetIpPathTable=_AheadLib_GetIpPathTable,@110")
+#pragma comment(linker, "/EXPORT:GetIpStatistics=_AheadLib_GetIpStatistics,@111")
+#pragma comment(linker, "/EXPORT:GetIpStatisticsEx=_AheadLib_GetIpStatisticsEx,@112")
+#pragma comment(linker, "/EXPORT:GetJobCompartmentId=_AheadLib_GetJobCompartmentId,@113")
+#pragma comment(linker, "/EXPORT:GetMulticastIpAddressEntry=_AheadLib_GetMulticastIpAddressEntry,@114")
+#pragma comment(linker, "/EXPORT:GetMulticastIpAddressTable=_AheadLib_GetMulticastIpAddressTable,@115")
+#pragma comment(linker, "/EXPORT:GetNetworkInformation=_AheadLib_GetNetworkInformation,@116")
+#pragma comment(linker, "/EXPORT:GetNetworkParams=_AheadLib_GetNetworkParams,@117")
+#pragma comment(linker, "/EXPORT:GetNumberOfInterfaces=_AheadLib_GetNumberOfInterfaces,@118")
+#pragma comment(linker, "/EXPORT:GetOwnerModuleFromPidAndInfo=_AheadLib_GetOwnerModuleFromPidAndInfo,@119")
+#pragma comment(linker, "/EXPORT:GetOwnerModuleFromTcp6Entry=_AheadLib_GetOwnerModuleFromTcp6Entry,@120")
+#pragma comment(linker, "/EXPORT:GetOwnerModuleFromTcpEntry=_AheadLib_GetOwnerModuleFromTcpEntry,@121")
+#pragma comment(linker, "/EXPORT:GetOwnerModuleFromUdp6Entry=_AheadLib_GetOwnerModuleFromUdp6Entry,@122")
+#pragma comment(linker, "/EXPORT:GetOwnerModuleFromUdpEntry=_AheadLib_GetOwnerModuleFromUdpEntry,@123")
+#pragma comment(linker, "/EXPORT:GetPerAdapterInfo=_AheadLib_GetPerAdapterInfo,@124")
+#pragma comment(linker, "/EXPORT:GetPerTcp6ConnectionEStats=_AheadLib_GetPerTcp6ConnectionEStats,@125")
+#pragma comment(linker, "/EXPORT:GetPerTcp6ConnectionStats=_AheadLib_GetPerTcp6ConnectionStats,@126")
+#pragma comment(linker, "/EXPORT:GetPerTcpConnectionEStats=_AheadLib_GetPerTcpConnectionEStats,@127")
+#pragma comment(linker, "/EXPORT:GetPerTcpConnectionStats=_AheadLib_GetPerTcpConnectionStats,@128")
+#pragma comment(linker, "/EXPORT:GetRTTAndHopCount=_AheadLib_GetRTTAndHopCount,@129")
+#pragma comment(linker, "/EXPORT:GetSessionCompartmentId=_AheadLib_GetSessionCompartmentId,@130")
+#pragma comment(linker, "/EXPORT:GetTcp6Table2=_AheadLib_GetTcp6Table2,@131")
+#pragma comment(linker, "/EXPORT:GetTcp6Table=_AheadLib_GetTcp6Table,@132")
+#pragma comment(linker, "/EXPORT:GetTcpStatistics=_AheadLib_GetTcpStatistics,@133")
+#pragma comment(linker, "/EXPORT:GetTcpStatisticsEx2=_AheadLib_GetTcpStatisticsEx2,@134")
+#pragma comment(linker, "/EXPORT:GetTcpStatisticsEx=_AheadLib_GetTcpStatisticsEx,@135")
+#pragma comment(linker, "/EXPORT:GetTcpTable2=_AheadLib_GetTcpTable2,@136")
+#pragma comment(linker, "/EXPORT:GetTcpTable=_AheadLib_GetTcpTable,@137")
+#pragma comment(linker, "/EXPORT:GetTeredoPort=_AheadLib_GetTeredoPort,@138")
+#pragma comment(linker, "/EXPORT:GetUdp6Table=_AheadLib_GetUdp6Table,@139")
+#pragma comment(linker, "/EXPORT:GetUdpStatistics=_AheadLib_GetUdpStatistics,@140")
+#pragma comment(linker, "/EXPORT:GetUdpStatisticsEx2=_AheadLib_GetUdpStatisticsEx2,@141")
+#pragma comment(linker, "/EXPORT:GetUdpStatisticsEx=_AheadLib_GetUdpStatisticsEx,@142")
+#pragma comment(linker, "/EXPORT:GetUdpTable=_AheadLib_GetUdpTable,@143")
+#pragma comment(linker, "/EXPORT:GetUniDirectionalAdapterInfo=_AheadLib_GetUniDirectionalAdapterInfo,@144")
+#pragma comment(linker, "/EXPORT:GetUnicastIpAddressEntry=_AheadLib_GetUnicastIpAddressEntry,@145")
+#pragma comment(linker, "/EXPORT:GetUnicastIpAddressTable=_AheadLib_GetUnicastIpAddressTable,@146")
+#pragma comment(linker, "/EXPORT:GetWPAOACSupportLevel=_AheadLib_GetWPAOACSupportLevel,@147")
+#pragma comment(linker, "/EXPORT:Icmp6CreateFile=_AheadLib_Icmp6CreateFile,@148")
+#pragma comment(linker, "/EXPORT:Icmp6ParseReplies=_AheadLib_Icmp6ParseReplies,@149")
+#pragma comment(linker, "/EXPORT:Icmp6SendEcho2=_AheadLib_Icmp6SendEcho2,@150")
+#pragma comment(linker, "/EXPORT:IcmpCloseHandle=_AheadLib_IcmpCloseHandle,@151")
+#pragma comment(linker, "/EXPORT:IcmpCreateFile=_AheadLib_IcmpCreateFile,@152")
+#pragma comment(linker, "/EXPORT:IcmpParseReplies=_AheadLib_IcmpParseReplies,@153")
+#pragma comment(linker, "/EXPORT:IcmpSendEcho2=_AheadLib_IcmpSendEcho2,@154")
+#pragma comment(linker, "/EXPORT:IcmpSendEcho2Ex=_AheadLib_IcmpSendEcho2Ex,@155")
+#pragma comment(linker, "/EXPORT:IcmpSendEcho=_AheadLib_IcmpSendEcho,@156")
+#pragma comment(linker, "/EXPORT:InitializeCompartmentEntry=_AheadLib_InitializeCompartmentEntry,@157")
+#pragma comment(linker, "/EXPORT:InitializeIpForwardEntry=_AheadLib_InitializeIpForwardEntry,@158")
+#pragma comment(linker, "/EXPORT:InitializeIpInterfaceEntry=_AheadLib_InitializeIpInterfaceEntry,@159")
+#pragma comment(linker, "/EXPORT:InitializeUnicastIpAddressEntry=_AheadLib_InitializeUnicastIpAddressEntry,@160")
+#pragma comment(linker, "/EXPORT:InternalCleanupPersistentStore=_AheadLib_InternalCleanupPersistentStore,@161")
+#pragma comment(linker, "/EXPORT:InternalCreateAnycastIpAddressEntry=_AheadLib_InternalCreateAnycastIpAddressEntry,@162")
+#pragma comment(linker, "/EXPORT:InternalCreateIpForwardEntry2=_AheadLib_InternalCreateIpForwardEntry2,@163")
+#pragma comment(linker, "/EXPORT:InternalCreateIpForwardEntry=_AheadLib_InternalCreateIpForwardEntry,@164")
+#pragma comment(linker, "/EXPORT:InternalCreateIpNetEntry2=_AheadLib_InternalCreateIpNetEntry2,@165")
+#pragma comment(linker, "/EXPORT:InternalCreateIpNetEntry=_AheadLib_InternalCreateIpNetEntry,@166")
+#pragma comment(linker, "/EXPORT:InternalCreateUnicastIpAddressEntry=_AheadLib_InternalCreateUnicastIpAddressEntry,@167")
+#pragma comment(linker, "/EXPORT:InternalDeleteAnycastIpAddressEntry=_AheadLib_InternalDeleteAnycastIpAddressEntry,@168")
+#pragma comment(linker, "/EXPORT:InternalDeleteIpForwardEntry2=_AheadLib_InternalDeleteIpForwardEntry2,@169")
+#pragma comment(linker, "/EXPORT:InternalDeleteIpForwardEntry=_AheadLib_InternalDeleteIpForwardEntry,@170")
+#pragma comment(linker, "/EXPORT:InternalDeleteIpNetEntry2=_AheadLib_InternalDeleteIpNetEntry2,@171")
+#pragma comment(linker, "/EXPORT:InternalDeleteIpNetEntry=_AheadLib_InternalDeleteIpNetEntry,@172")
+#pragma comment(linker, "/EXPORT:InternalDeleteUnicastIpAddressEntry=_AheadLib_InternalDeleteUnicastIpAddressEntry,@173")
+#pragma comment(linker, "/EXPORT:InternalFindInterfaceByAddress=_AheadLib_InternalFindInterfaceByAddress,@174")
+#pragma comment(linker, "/EXPORT:InternalGetAnycastIpAddressEntry=_AheadLib_InternalGetAnycastIpAddressEntry,@175")
+#pragma comment(linker, "/EXPORT:InternalGetAnycastIpAddressTable=_AheadLib_InternalGetAnycastIpAddressTable,@176")
+#pragma comment(linker, "/EXPORT:InternalGetBoundTcp6EndpointTable=_AheadLib_InternalGetBoundTcp6EndpointTable,@177")
+#pragma comment(linker, "/EXPORT:InternalGetBoundTcpEndpointTable=_AheadLib_InternalGetBoundTcpEndpointTable,@178")
+#pragma comment(linker, "/EXPORT:InternalGetForwardIpTable2=_AheadLib_InternalGetForwardIpTable2,@179")
+#pragma comment(linker, "/EXPORT:InternalGetIPPhysicalInterfaceForDestination=_AheadLib_InternalGetIPPhysicalInterfaceForDestination,@180")
+#pragma comment(linker, "/EXPORT:InternalGetIfEntry2=_AheadLib_InternalGetIfEntry2,@181")
+#pragma comment(linker, "/EXPORT:InternalGetIfTable2=_AheadLib_InternalGetIfTable2,@182")
+#pragma comment(linker, "/EXPORT:InternalGetIfTable=_AheadLib_InternalGetIfTable,@183")
+#pragma comment(linker, "/EXPORT:InternalGetIpAddrTable=_AheadLib_InternalGetIpAddrTable,@184")
+#pragma comment(linker, "/EXPORT:InternalGetIpForwardEntry2=_AheadLib_InternalGetIpForwardEntry2,@185")
+#pragma comment(linker, "/EXPORT:InternalGetIpForwardTable=_AheadLib_InternalGetIpForwardTable,@186")
+#pragma comment(linker, "/EXPORT:InternalGetIpInterfaceEntry=_AheadLib_InternalGetIpInterfaceEntry,@187")
+#pragma comment(linker, "/EXPORT:InternalGetIpInterfaceTable=_AheadLib_InternalGetIpInterfaceTable,@188")
+#pragma comment(linker, "/EXPORT:InternalGetIpNetEntry2=_AheadLib_InternalGetIpNetEntry2,@189")
+#pragma comment(linker, "/EXPORT:InternalGetIpNetTable2=_AheadLib_InternalGetIpNetTable2,@190")
+#pragma comment(linker, "/EXPORT:InternalGetIpNetTable=_AheadLib_InternalGetIpNetTable,@191")
+#pragma comment(linker, "/EXPORT:InternalGetMulticastIpAddressEntry=_AheadLib_InternalGetMulticastIpAddressEntry,@192")
+#pragma comment(linker, "/EXPORT:InternalGetMulticastIpAddressTable=_AheadLib_InternalGetMulticastIpAddressTable,@193")
+#pragma comment(linker, "/EXPORT:InternalGetRtcSlotInformation=_AheadLib_InternalGetRtcSlotInformation,@194")
+#pragma comment(linker, "/EXPORT:InternalGetTcp6Table2=_AheadLib_InternalGetTcp6Table2,@195")
+#pragma comment(linker, "/EXPORT:InternalGetTcp6TableWithOwnerModule=_AheadLib_InternalGetTcp6TableWithOwnerModule,@196")
+#pragma comment(linker, "/EXPORT:InternalGetTcp6TableWithOwnerPid=_AheadLib_InternalGetTcp6TableWithOwnerPid,@197")
+#pragma comment(linker, "/EXPORT:InternalGetTcpTable2=_AheadLib_InternalGetTcpTable2,@198")
+#pragma comment(linker, "/EXPORT:InternalGetTcpTable=_AheadLib_InternalGetTcpTable,@199")
+#pragma comment(linker, "/EXPORT:InternalGetTcpTableEx=_AheadLib_InternalGetTcpTableEx,@200")
+#pragma comment(linker, "/EXPORT:InternalGetTcpTableWithOwnerModule=_AheadLib_InternalGetTcpTableWithOwnerModule,@201")
+#pragma comment(linker, "/EXPORT:InternalGetTcpTableWithOwnerPid=_AheadLib_InternalGetTcpTableWithOwnerPid,@202")
+#pragma comment(linker, "/EXPORT:InternalGetTunnelPhysicalAdapter=_AheadLib_InternalGetTunnelPhysicalAdapter,@203")
+#pragma comment(linker, "/EXPORT:InternalGetUdp6TableWithOwnerModule=_AheadLib_InternalGetUdp6TableWithOwnerModule,@204")
+#pragma comment(linker, "/EXPORT:InternalGetUdp6TableWithOwnerPid=_AheadLib_InternalGetUdp6TableWithOwnerPid,@205")
+#pragma comment(linker, "/EXPORT:InternalGetUdpTable=_AheadLib_InternalGetUdpTable,@206")
+#pragma comment(linker, "/EXPORT:InternalGetUdpTableEx=_AheadLib_InternalGetUdpTableEx,@207")
+#pragma comment(linker, "/EXPORT:InternalGetUdpTableWithOwnerModule=_AheadLib_InternalGetUdpTableWithOwnerModule,@208")
+#pragma comment(linker, "/EXPORT:InternalGetUdpTableWithOwnerPid=_AheadLib_InternalGetUdpTableWithOwnerPid,@209")
+#pragma comment(linker, "/EXPORT:InternalGetUnicastIpAddressEntry=_AheadLib_InternalGetUnicastIpAddressEntry,@210")
+#pragma comment(linker, "/EXPORT:InternalGetUnicastIpAddressTable=_AheadLib_InternalGetUnicastIpAddressTable,@211")
+#pragma comment(linker, "/EXPORT:InternalIcmpCreateFileEx=_AheadLib_InternalIcmpCreateFileEx,@212")
+#pragma comment(linker, "/EXPORT:InternalSetIfEntry=_AheadLib_InternalSetIfEntry,@213")
+#pragma comment(linker, "/EXPORT:InternalSetIpForwardEntry2=_AheadLib_InternalSetIpForwardEntry2,@214")
+#pragma comment(linker, "/EXPORT:InternalSetIpForwardEntry=_AheadLib_InternalSetIpForwardEntry,@215")
+#pragma comment(linker, "/EXPORT:InternalSetIpInterfaceEntry=_AheadLib_InternalSetIpInterfaceEntry,@216")
+#pragma comment(linker, "/EXPORT:InternalSetIpNetEntry2=_AheadLib_InternalSetIpNetEntry2,@217")
+#pragma comment(linker, "/EXPORT:InternalSetIpNetEntry=_AheadLib_InternalSetIpNetEntry,@218")
+#pragma comment(linker, "/EXPORT:InternalSetIpStats=_AheadLib_InternalSetIpStats,@219")
+#pragma comment(linker, "/EXPORT:InternalSetTcpEntry=_AheadLib_InternalSetTcpEntry,@220")
+#pragma comment(linker, "/EXPORT:InternalSetTeredoPort=_AheadLib_InternalSetTeredoPort,@221")
+#pragma comment(linker, "/EXPORT:InternalSetUnicastIpAddressEntry=_AheadLib_InternalSetUnicastIpAddressEntry,@222")
+#pragma comment(linker, "/EXPORT:IpReleaseAddress=_AheadLib_IpReleaseAddress,@223")
+#pragma comment(linker, "/EXPORT:IpRenewAddress=_AheadLib_IpRenewAddress,@224")
+#pragma comment(linker, "/EXPORT:LookupPersistentTcpPortReservation=_AheadLib_LookupPersistentTcpPortReservation,@225")
+#pragma comment(linker, "/EXPORT:LookupPersistentUdpPortReservation=_AheadLib_LookupPersistentUdpPortReservation,@226")
+#pragma comment(linker, "/EXPORT:NTPTimeToNTFileTime=_AheadLib_NTPTimeToNTFileTime,@227")
+#pragma comment(linker, "/EXPORT:NTTimeToNTPTime=_AheadLib_NTTimeToNTPTime,@228")
+#pragma comment(linker, "/EXPORT:NhGetGuidFromInterfaceName=_AheadLib_NhGetGuidFromInterfaceName,@229")
+#pragma comment(linker, "/EXPORT:NhGetInterfaceDescriptionFromGuid=_AheadLib_NhGetInterfaceDescriptionFromGuid,@230")
+#pragma comment(linker, "/EXPORT:NhGetInterfaceNameFromDeviceGuid=_AheadLib_NhGetInterfaceNameFromDeviceGuid,@231")
+#pragma comment(linker, "/EXPORT:NhGetInterfaceNameFromGuid=_AheadLib_NhGetInterfaceNameFromGuid,@232")
+#pragma comment(linker, "/EXPORT:NhpAllocateAndGetInterfaceInfoFromStack=_AheadLib_NhpAllocateAndGetInterfaceInfoFromStack,@233")
+#pragma comment(linker, "/EXPORT:NotifyAddrChange=_AheadLib_NotifyAddrChange,@234")
+#pragma comment(linker, "/EXPORT:NotifyCompartmentChange=_AheadLib_NotifyCompartmentChange,@235")
+#pragma comment(linker, "/EXPORT:NotifyIfTimestampConfigChange=_AheadLib_NotifyIfTimestampConfigChange,@236")
+#pragma comment(linker, "/EXPORT:NotifyIpInterfaceChange=_AheadLib_NotifyIpInterfaceChange,@237")
+#pragma comment(linker, "/EXPORT:NotifyRouteChange2=_AheadLib_NotifyRouteChange2,@238")
+#pragma comment(linker, "/EXPORT:NotifyRouteChange=_AheadLib_NotifyRouteChange,@239")
+#pragma comment(linker, "/EXPORT:NotifyStableUnicastIpAddressTable=_AheadLib_NotifyStableUnicastIpAddressTable,@240")
+#pragma comment(linker, "/EXPORT:NotifyTeredoPortChange=_AheadLib_NotifyTeredoPortChange,@241")
+#pragma comment(linker, "/EXPORT:NotifyUnicastIpAddressChange=_AheadLib_NotifyUnicastIpAddressChange,@242")
+#pragma comment(linker, "/EXPORT:OpenCompartment=_AheadLib_OpenCompartment,@243")
+#pragma comment(linker, "/EXPORT:ParseNetworkString=_AheadLib_ParseNetworkString,@244")
+#pragma comment(linker, "/EXPORT:ResolveIpNetEntry2=_AheadLib_ResolveIpNetEntry2,@261")
+#pragma comment(linker, "/EXPORT:ResolveNeighbor=_AheadLib_ResolveNeighbor,@262")
+#pragma comment(linker, "/EXPORT:RestoreMediaSense=_AheadLib_RestoreMediaSense,@263")
+#pragma comment(linker, "/EXPORT:SendARP=_AheadLib_SendARP,@264")
+#pragma comment(linker, "/EXPORT:SetAdapterIpAddress=_AheadLib_SetAdapterIpAddress,@265")
+#pragma comment(linker, "/EXPORT:SetCurrentThreadCompartmentId=_AheadLib_SetCurrentThreadCompartmentId,@266")
+#pragma comment(linker, "/EXPORT:SetCurrentThreadCompartmentScope=_AheadLib_SetCurrentThreadCompartmentScope,@267")
+#pragma comment(linker, "/EXPORT:SetDnsSettings=_AheadLib_SetDnsSettings,@268")
+#pragma comment(linker, "/EXPORT:SetIfEntry=_AheadLib_SetIfEntry,@269")
+#pragma comment(linker, "/EXPORT:SetInterfaceDnsSettings=_AheadLib_SetInterfaceDnsSettings,@270")
+#pragma comment(linker, "/EXPORT:SetIpForwardEntry2=_AheadLib_SetIpForwardEntry2,@271")
+#pragma comment(linker, "/EXPORT:SetIpForwardEntry=_AheadLib_SetIpForwardEntry,@272")
+#pragma comment(linker, "/EXPORT:SetIpInterfaceEntry=_AheadLib_SetIpInterfaceEntry,@273")
+#pragma comment(linker, "/EXPORT:SetIpNetEntry2=_AheadLib_SetIpNetEntry2,@274")
+#pragma comment(linker, "/EXPORT:SetIpNetEntry=_AheadLib_SetIpNetEntry,@275")
+#pragma comment(linker, "/EXPORT:SetIpStatistics=_AheadLib_SetIpStatistics,@276")
+#pragma comment(linker, "/EXPORT:SetIpStatisticsEx=_AheadLib_SetIpStatisticsEx,@277")
+#pragma comment(linker, "/EXPORT:SetIpTTL=_AheadLib_SetIpTTL,@278")
+#pragma comment(linker, "/EXPORT:SetJobCompartmentId=_AheadLib_SetJobCompartmentId,@279")
+#pragma comment(linker, "/EXPORT:SetNetworkInformation=_AheadLib_SetNetworkInformation,@280")
+#pragma comment(linker, "/EXPORT:SetPerTcp6ConnectionEStats=_AheadLib_SetPerTcp6ConnectionEStats,@281")
+#pragma comment(linker, "/EXPORT:SetPerTcp6ConnectionStats=_AheadLib_SetPerTcp6ConnectionStats,@282")
+#pragma comment(linker, "/EXPORT:SetPerTcpConnectionEStats=_AheadLib_SetPerTcpConnectionEStats,@283")
+#pragma comment(linker, "/EXPORT:SetPerTcpConnectionStats=_AheadLib_SetPerTcpConnectionStats,@284")
+#pragma comment(linker, "/EXPORT:SetSessionCompartmentId=_AheadLib_SetSessionCompartmentId,@285")
+#pragma comment(linker, "/EXPORT:SetTcpEntry=_AheadLib_SetTcpEntry,@286")
+#pragma comment(linker, "/EXPORT:SetUnicastIpAddressEntry=_AheadLib_SetUnicastIpAddressEntry,@287")
+#pragma comment(linker, "/EXPORT:UnenableRouter=_AheadLib_UnenableRouter,@288")
+#pragma comment(linker, "/EXPORT:do_echo_rep=_AheadLib_do_echo_rep,@289")
+#pragma comment(linker, "/EXPORT:do_echo_req=_AheadLib_do_echo_req,@290")
+#pragma comment(linker, "/EXPORT:if_indextoname=_AheadLib_if_indextoname,@291")
+#pragma comment(linker, "/EXPORT:if_nametoindex=_AheadLib_if_nametoindex,@292")
+#pragma comment(linker, "/EXPORT:register_icmp=_AheadLib_register_icmp,@293")
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -299,7 +311,7 @@
 namespace AheadLib
 {
 	HMODULE m_hModule = NULL;	// 原始模块句柄
-	DWORD m_dwReturn[282] = {0};	// 原始函数返回地址
+	DWORD m_dwReturn[293] = {0};	// 原始函数返回地址
 
 
 	// 加载原始模块
@@ -308,7 +320,8 @@ namespace AheadLib
 		TCHAR tzPath[MAX_PATH];
 		TCHAR tzTemp[MAX_PATH * 2];
 
-		lstrcpy(tzPath, TEXT("IPHLPAPIOrg"));
+		GetSystemDirectory(tzPath, MAX_PATH);
+		lstrcat(tzPath, TEXT("\\IPHLPAPI"));
 		m_hModule = LoadLibrary(tzPath);
 		if (m_hModule == NULL)
 		{
@@ -338,12 +351,6 @@ namespace AheadLib
 		fpAddress = GetProcAddress(m_hModule, pszProcName);
 		if (fpAddress == NULL)
 		{
-			if (HIWORD(pszProcName) == 0)
-			{
-				wsprintf(szProcName, "%d", pszProcName);
-				pszProcName = szProcName;
-			}
-
 			wsprintf(tzTemp, TEXT("无法找到函数 %hs，程序无法正常运行。"), pszProcName);
 			MessageBox(NULL, tzTemp, TEXT("AheadLib"), MB_ICONSTOP);
 			ExitProcess(-2);
@@ -364,7 +371,7 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, PVOID pvReserved)
 	if (dwReason == DLL_PROCESS_ATTACH)
 	{
 		DisableThreadLibraryCalls(hModule);
-
+		hook();
 		return Load();
 	}
 	else if (dwReason == DLL_PROCESS_DETACH)
@@ -382,14 +389,8 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, PVOID pvReserved)
 // 导出函数
 ALCDECL AheadLib_AddIPAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[0 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("AddIPAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[0 * TYPE long];
+	GetAddress("AddIPAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -399,14 +400,8 @@ ALCDECL AheadLib_AddIPAddress(void)
 // 导出函数
 ALCDECL AheadLib_AllocateAndGetInterfaceInfoFromStack(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[1 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("AllocateAndGetInterfaceInfoFromStack")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[1 * TYPE long];
+	GetAddress("AllocateAndGetInterfaceInfoFromStack");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -416,14 +411,8 @@ ALCDECL AheadLib_AllocateAndGetInterfaceInfoFromStack(void)
 // 导出函数
 ALCDECL AheadLib_AllocateAndGetIpAddrTableFromStack(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[2 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("AllocateAndGetIpAddrTableFromStack")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[2 * TYPE long];
+	GetAddress("AllocateAndGetIpAddrTableFromStack");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -433,14 +422,19 @@ ALCDECL AheadLib_AllocateAndGetIpAddrTableFromStack(void)
 // 导出函数
 ALCDECL AheadLib_CancelIPChangeNotify(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[3 * TYPE long];
+	GetAddress("CancelIPChangeNotify");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("CancelIPChangeNotify")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[3 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_CancelIfTimestampConfigChange(void)
+{
+	GetAddress("CancelIfTimestampConfigChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -450,14 +444,19 @@ ALCDECL AheadLib_CancelIPChangeNotify(void)
 // 导出函数
 ALCDECL AheadLib_CancelMibChangeNotify2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[4 * TYPE long];
+	GetAddress("CancelMibChangeNotify2");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("CancelMibChangeNotify2")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[4 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_CaptureInterfaceHardwareCrossTimestamp(void)
+{
+	GetAddress("CaptureInterfaceHardwareCrossTimestamp");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -467,14 +466,8 @@ ALCDECL AheadLib_CancelMibChangeNotify2(void)
 // 导出函数
 ALCDECL AheadLib_CloseCompartment(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[5 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CloseCompartment")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[5 * TYPE long];
+	GetAddress("CloseCompartment");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -484,14 +477,8 @@ ALCDECL AheadLib_CloseCompartment(void)
 // 导出函数
 ALCDECL AheadLib_CloseGetIPPhysicalInterfaceForDestination(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[6 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CloseGetIPPhysicalInterfaceForDestination")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[6 * TYPE long];
+	GetAddress("CloseGetIPPhysicalInterfaceForDestination");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -501,14 +488,8 @@ ALCDECL AheadLib_CloseGetIPPhysicalInterfaceForDestination(void)
 // 导出函数
 ALCDECL AheadLib_ConvertCompartmentGuidToId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[7 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertCompartmentGuidToId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[7 * TYPE long];
+	GetAddress("ConvertCompartmentGuidToId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -518,14 +499,8 @@ ALCDECL AheadLib_ConvertCompartmentGuidToId(void)
 // 导出函数
 ALCDECL AheadLib_ConvertCompartmentIdToGuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[8 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertCompartmentIdToGuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[8 * TYPE long];
+	GetAddress("ConvertCompartmentIdToGuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -535,14 +510,8 @@ ALCDECL AheadLib_ConvertCompartmentIdToGuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertGuidToStringA(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[9 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertGuidToStringA")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[9 * TYPE long];
+	GetAddress("ConvertGuidToStringA");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -552,14 +521,8 @@ ALCDECL AheadLib_ConvertGuidToStringA(void)
 // 导出函数
 ALCDECL AheadLib_ConvertGuidToStringW(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[10 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertGuidToStringW")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[10 * TYPE long];
+	GetAddress("ConvertGuidToStringW");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -569,14 +532,8 @@ ALCDECL AheadLib_ConvertGuidToStringW(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceAliasToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[11 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceAliasToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[11 * TYPE long];
+	GetAddress("ConvertInterfaceAliasToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -586,14 +543,8 @@ ALCDECL AheadLib_ConvertInterfaceAliasToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceGuidToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[12 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceGuidToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[12 * TYPE long];
+	GetAddress("ConvertInterfaceGuidToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -603,14 +554,8 @@ ALCDECL AheadLib_ConvertInterfaceGuidToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceIndexToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[13 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceIndexToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[13 * TYPE long];
+	GetAddress("ConvertInterfaceIndexToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -620,14 +565,8 @@ ALCDECL AheadLib_ConvertInterfaceIndexToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceLuidToAlias(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[14 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceLuidToAlias")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[14 * TYPE long];
+	GetAddress("ConvertInterfaceLuidToAlias");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -637,14 +576,8 @@ ALCDECL AheadLib_ConvertInterfaceLuidToAlias(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceLuidToGuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[15 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceLuidToGuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[15 * TYPE long];
+	GetAddress("ConvertInterfaceLuidToGuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -654,14 +587,8 @@ ALCDECL AheadLib_ConvertInterfaceLuidToGuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceLuidToIndex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[16 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceLuidToIndex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[16 * TYPE long];
+	GetAddress("ConvertInterfaceLuidToIndex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -671,14 +598,8 @@ ALCDECL AheadLib_ConvertInterfaceLuidToIndex(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceLuidToNameA(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[17 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceLuidToNameA")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[17 * TYPE long];
+	GetAddress("ConvertInterfaceLuidToNameA");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -688,14 +609,8 @@ ALCDECL AheadLib_ConvertInterfaceLuidToNameA(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceLuidToNameW(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[18 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceLuidToNameW")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[18 * TYPE long];
+	GetAddress("ConvertInterfaceLuidToNameW");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -705,14 +620,8 @@ ALCDECL AheadLib_ConvertInterfaceLuidToNameW(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceNameToLuidA(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[19 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceNameToLuidA")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[19 * TYPE long];
+	GetAddress("ConvertInterfaceNameToLuidA");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -722,14 +631,8 @@ ALCDECL AheadLib_ConvertInterfaceNameToLuidA(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfaceNameToLuidW(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[20 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfaceNameToLuidW")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[20 * TYPE long];
+	GetAddress("ConvertInterfaceNameToLuidW");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -739,14 +642,8 @@ ALCDECL AheadLib_ConvertInterfaceNameToLuidW(void)
 // 导出函数
 ALCDECL AheadLib_ConvertInterfacePhysicalAddressToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[21 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertInterfacePhysicalAddressToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[21 * TYPE long];
+	GetAddress("ConvertInterfacePhysicalAddressToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -756,14 +653,8 @@ ALCDECL AheadLib_ConvertInterfacePhysicalAddressToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertIpv4MaskToLength(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[22 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertIpv4MaskToLength")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[22 * TYPE long];
+	GetAddress("ConvertIpv4MaskToLength");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -773,14 +664,8 @@ ALCDECL AheadLib_ConvertIpv4MaskToLength(void)
 // 导出函数
 ALCDECL AheadLib_ConvertLengthToIpv4Mask(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[23 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertLengthToIpv4Mask")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[23 * TYPE long];
+	GetAddress("ConvertLengthToIpv4Mask");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -790,14 +675,8 @@ ALCDECL AheadLib_ConvertLengthToIpv4Mask(void)
 // 导出函数
 ALCDECL AheadLib_ConvertRemoteInterfaceAliasToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[24 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertRemoteInterfaceAliasToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[24 * TYPE long];
+	GetAddress("ConvertRemoteInterfaceAliasToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -807,14 +686,8 @@ ALCDECL AheadLib_ConvertRemoteInterfaceAliasToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertRemoteInterfaceGuidToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[25 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertRemoteInterfaceGuidToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[25 * TYPE long];
+	GetAddress("ConvertRemoteInterfaceGuidToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -824,14 +697,8 @@ ALCDECL AheadLib_ConvertRemoteInterfaceGuidToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertRemoteInterfaceIndexToLuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[26 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertRemoteInterfaceIndexToLuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[26 * TYPE long];
+	GetAddress("ConvertRemoteInterfaceIndexToLuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -841,14 +708,8 @@ ALCDECL AheadLib_ConvertRemoteInterfaceIndexToLuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertRemoteInterfaceLuidToAlias(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[27 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertRemoteInterfaceLuidToAlias")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[27 * TYPE long];
+	GetAddress("ConvertRemoteInterfaceLuidToAlias");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -858,14 +719,8 @@ ALCDECL AheadLib_ConvertRemoteInterfaceLuidToAlias(void)
 // 导出函数
 ALCDECL AheadLib_ConvertRemoteInterfaceLuidToGuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[28 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertRemoteInterfaceLuidToGuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[28 * TYPE long];
+	GetAddress("ConvertRemoteInterfaceLuidToGuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -875,14 +730,8 @@ ALCDECL AheadLib_ConvertRemoteInterfaceLuidToGuid(void)
 // 导出函数
 ALCDECL AheadLib_ConvertRemoteInterfaceLuidToIndex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[29 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertRemoteInterfaceLuidToIndex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[29 * TYPE long];
+	GetAddress("ConvertRemoteInterfaceLuidToIndex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -892,14 +741,8 @@ ALCDECL AheadLib_ConvertRemoteInterfaceLuidToIndex(void)
 // 导出函数
 ALCDECL AheadLib_ConvertStringToGuidA(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[30 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertStringToGuidA")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[30 * TYPE long];
+	GetAddress("ConvertStringToGuidA");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -909,14 +752,8 @@ ALCDECL AheadLib_ConvertStringToGuidA(void)
 // 导出函数
 ALCDECL AheadLib_ConvertStringToGuidW(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[31 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertStringToGuidW")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[31 * TYPE long];
+	GetAddress("ConvertStringToGuidW");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -926,14 +763,8 @@ ALCDECL AheadLib_ConvertStringToGuidW(void)
 // 导出函数
 ALCDECL AheadLib_ConvertStringToInterfacePhysicalAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[32 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ConvertStringToInterfacePhysicalAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[32 * TYPE long];
+	GetAddress("ConvertStringToInterfacePhysicalAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -943,14 +774,8 @@ ALCDECL AheadLib_ConvertStringToInterfacePhysicalAddress(void)
 // 导出函数
 ALCDECL AheadLib_CreateAnycastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[33 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateAnycastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[33 * TYPE long];
+	GetAddress("CreateAnycastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -960,14 +785,8 @@ ALCDECL AheadLib_CreateAnycastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_CreateCompartment(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[34 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateCompartment")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[34 * TYPE long];
+	GetAddress("CreateCompartment");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -977,14 +796,8 @@ ALCDECL AheadLib_CreateCompartment(void)
 // 导出函数
 ALCDECL AheadLib_CreateIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[35 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[35 * TYPE long];
+	GetAddress("CreateIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -994,14 +807,8 @@ ALCDECL AheadLib_CreateIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_CreateIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[36 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[36 * TYPE long];
+	GetAddress("CreateIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1011,14 +818,8 @@ ALCDECL AheadLib_CreateIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_CreateIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[37 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[37 * TYPE long];
+	GetAddress("CreateIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1028,14 +829,8 @@ ALCDECL AheadLib_CreateIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_CreateIpNetEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[38 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateIpNetEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[38 * TYPE long];
+	GetAddress("CreateIpNetEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1045,14 +840,8 @@ ALCDECL AheadLib_CreateIpNetEntry(void)
 // 导出函数
 ALCDECL AheadLib_CreatePersistentTcpPortReservation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[39 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreatePersistentTcpPortReservation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[39 * TYPE long];
+	GetAddress("CreatePersistentTcpPortReservation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1062,14 +851,8 @@ ALCDECL AheadLib_CreatePersistentTcpPortReservation(void)
 // 导出函数
 ALCDECL AheadLib_CreatePersistentUdpPortReservation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[40 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreatePersistentUdpPortReservation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[40 * TYPE long];
+	GetAddress("CreatePersistentUdpPortReservation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1079,14 +862,8 @@ ALCDECL AheadLib_CreatePersistentUdpPortReservation(void)
 // 导出函数
 ALCDECL AheadLib_CreateProxyArpEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[41 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateProxyArpEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[41 * TYPE long];
+	GetAddress("CreateProxyArpEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1096,14 +873,8 @@ ALCDECL AheadLib_CreateProxyArpEntry(void)
 // 导出函数
 ALCDECL AheadLib_CreateSortedAddressPairs(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[42 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateSortedAddressPairs")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[42 * TYPE long];
+	GetAddress("CreateSortedAddressPairs");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1113,14 +884,8 @@ ALCDECL AheadLib_CreateSortedAddressPairs(void)
 // 导出函数
 ALCDECL AheadLib_CreateUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[43 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("CreateUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[43 * TYPE long];
+	GetAddress("CreateUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1130,14 +895,8 @@ ALCDECL AheadLib_CreateUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_DeleteAnycastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[44 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteAnycastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[44 * TYPE long];
+	GetAddress("DeleteAnycastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1147,14 +906,8 @@ ALCDECL AheadLib_DeleteAnycastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_DeleteCompartment(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[45 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteCompartment")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[45 * TYPE long];
+	GetAddress("DeleteCompartment");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1164,14 +917,8 @@ ALCDECL AheadLib_DeleteCompartment(void)
 // 导出函数
 ALCDECL AheadLib_DeleteIPAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[46 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteIPAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[46 * TYPE long];
+	GetAddress("DeleteIPAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1181,14 +928,8 @@ ALCDECL AheadLib_DeleteIPAddress(void)
 // 导出函数
 ALCDECL AheadLib_DeleteIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[47 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[47 * TYPE long];
+	GetAddress("DeleteIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1198,14 +939,8 @@ ALCDECL AheadLib_DeleteIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_DeleteIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[48 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[48 * TYPE long];
+	GetAddress("DeleteIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1215,14 +950,8 @@ ALCDECL AheadLib_DeleteIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_DeleteIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[49 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[49 * TYPE long];
+	GetAddress("DeleteIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1232,14 +961,8 @@ ALCDECL AheadLib_DeleteIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_DeleteIpNetEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[50 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteIpNetEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[50 * TYPE long];
+	GetAddress("DeleteIpNetEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1249,14 +972,8 @@ ALCDECL AheadLib_DeleteIpNetEntry(void)
 // 导出函数
 ALCDECL AheadLib_DeletePersistentTcpPortReservation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[51 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeletePersistentTcpPortReservation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[51 * TYPE long];
+	GetAddress("DeletePersistentTcpPortReservation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1266,14 +983,8 @@ ALCDECL AheadLib_DeletePersistentTcpPortReservation(void)
 // 导出函数
 ALCDECL AheadLib_DeletePersistentUdpPortReservation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[52 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeletePersistentUdpPortReservation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[52 * TYPE long];
+	GetAddress("DeletePersistentUdpPortReservation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1283,14 +994,8 @@ ALCDECL AheadLib_DeletePersistentUdpPortReservation(void)
 // 导出函数
 ALCDECL AheadLib_DeleteProxyArpEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[53 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteProxyArpEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[53 * TYPE long];
+	GetAddress("DeleteProxyArpEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1300,14 +1005,8 @@ ALCDECL AheadLib_DeleteProxyArpEntry(void)
 // 导出函数
 ALCDECL AheadLib_DeleteUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[54 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DeleteUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[54 * TYPE long];
+	GetAddress("DeleteUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1317,14 +1016,8 @@ ALCDECL AheadLib_DeleteUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_DisableMediaSense(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[55 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("DisableMediaSense")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[55 * TYPE long];
+	GetAddress("DisableMediaSense");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1334,14 +1027,8 @@ ALCDECL AheadLib_DisableMediaSense(void)
 // 导出函数
 ALCDECL AheadLib_EnableRouter(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[56 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("EnableRouter")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[56 * TYPE long];
+	GetAddress("EnableRouter");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1351,14 +1038,8 @@ ALCDECL AheadLib_EnableRouter(void)
 // 导出函数
 ALCDECL AheadLib_FlushIpNetTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[57 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("FlushIpNetTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[57 * TYPE long];
+	GetAddress("FlushIpNetTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1368,14 +1049,8 @@ ALCDECL AheadLib_FlushIpNetTable2(void)
 // 导出函数
 ALCDECL AheadLib_FlushIpNetTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[58 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("FlushIpNetTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[58 * TYPE long];
+	GetAddress("FlushIpNetTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1385,14 +1060,30 @@ ALCDECL AheadLib_FlushIpNetTable(void)
 // 导出函数
 ALCDECL AheadLib_FlushIpPathTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[59 * TYPE long];
+	GetAddress("FlushIpPathTable");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("FlushIpPathTable")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[59 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_FreeDnsSettings(void)
+{
+	GetAddress("FreeDnsSettings");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_FreeInterfaceDnsSettings(void)
+{
+	GetAddress("FreeInterfaceDnsSettings");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1402,14 +1093,8 @@ ALCDECL AheadLib_FlushIpPathTable(void)
 // 导出函数
 ALCDECL AheadLib_FreeMibTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[60 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("FreeMibTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[60 * TYPE long];
+	GetAddress("FreeMibTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1419,14 +1104,8 @@ ALCDECL AheadLib_FreeMibTable(void)
 // 导出函数
 ALCDECL AheadLib_GetAdapterIndex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[61 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetAdapterIndex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[61 * TYPE long];
+	GetAddress("GetAdapterIndex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1436,14 +1115,8 @@ ALCDECL AheadLib_GetAdapterIndex(void)
 // 导出函数
 ALCDECL AheadLib_GetAdapterOrderMap(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[62 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetAdapterOrderMap")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[62 * TYPE long];
+	GetAddress("GetAdapterOrderMap");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1453,14 +1126,8 @@ ALCDECL AheadLib_GetAdapterOrderMap(void)
 // 导出函数
 ALCDECL AheadLib_GetAdaptersAddresses(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[63 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetAdaptersAddresses")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[63 * TYPE long];
+	GetAddress("GetAdaptersAddresses");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1470,14 +1137,8 @@ ALCDECL AheadLib_GetAdaptersAddresses(void)
 // 导出函数
 ALCDECL AheadLib_GetAdaptersInfo(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[64 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetAdaptersInfo")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[64 * TYPE long];
+	GetAddress("GetAdaptersInfo");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1487,14 +1148,8 @@ ALCDECL AheadLib_GetAdaptersInfo(void)
 // 导出函数
 ALCDECL AheadLib_GetAnycastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[65 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetAnycastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[65 * TYPE long];
+	GetAddress("GetAnycastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1504,14 +1159,8 @@ ALCDECL AheadLib_GetAnycastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetAnycastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[66 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetAnycastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[66 * TYPE long];
+	GetAddress("GetAnycastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1521,14 +1170,8 @@ ALCDECL AheadLib_GetAnycastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_GetBestInterface(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[67 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetBestInterface")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[67 * TYPE long];
+	GetAddress("GetBestInterface");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1538,14 +1181,8 @@ ALCDECL AheadLib_GetBestInterface(void)
 // 导出函数
 ALCDECL AheadLib_GetBestInterfaceEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[68 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetBestInterfaceEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[68 * TYPE long];
+	GetAddress("GetBestInterfaceEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1555,14 +1192,8 @@ ALCDECL AheadLib_GetBestInterfaceEx(void)
 // 导出函数
 ALCDECL AheadLib_GetBestRoute2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[69 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetBestRoute2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[69 * TYPE long];
+	GetAddress("GetBestRoute2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1572,14 +1203,8 @@ ALCDECL AheadLib_GetBestRoute2(void)
 // 导出函数
 ALCDECL AheadLib_GetBestRoute(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[70 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetBestRoute")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[70 * TYPE long];
+	GetAddress("GetBestRoute");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1589,14 +1214,8 @@ ALCDECL AheadLib_GetBestRoute(void)
 // 导出函数
 ALCDECL AheadLib_GetCurrentThreadCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[71 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetCurrentThreadCompartmentId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[71 * TYPE long];
+	GetAddress("GetCurrentThreadCompartmentId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1606,14 +1225,8 @@ ALCDECL AheadLib_GetCurrentThreadCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_GetCurrentThreadCompartmentScope(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[72 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetCurrentThreadCompartmentScope")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[72 * TYPE long];
+	GetAddress("GetCurrentThreadCompartmentScope");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1623,14 +1236,19 @@ ALCDECL AheadLib_GetCurrentThreadCompartmentScope(void)
 // 导出函数
 ALCDECL AheadLib_GetDefaultCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[73 * TYPE long];
+	GetAddress("GetDefaultCompartmentId");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("GetDefaultCompartmentId")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[73 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_GetDnsSettings(void)
+{
+	GetAddress("GetDnsSettings");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1640,14 +1258,8 @@ ALCDECL AheadLib_GetDefaultCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_GetExtendedTcpTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[74 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetExtendedTcpTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[74 * TYPE long];
+	GetAddress("GetExtendedTcpTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1657,14 +1269,8 @@ ALCDECL AheadLib_GetExtendedTcpTable(void)
 // 导出函数
 ALCDECL AheadLib_GetExtendedUdpTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[75 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetExtendedUdpTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[75 * TYPE long];
+	GetAddress("GetExtendedUdpTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1674,14 +1280,8 @@ ALCDECL AheadLib_GetExtendedUdpTable(void)
 // 导出函数
 ALCDECL AheadLib_GetFriendlyIfIndex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[76 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetFriendlyIfIndex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[76 * TYPE long];
+	GetAddress("GetFriendlyIfIndex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1691,14 +1291,8 @@ ALCDECL AheadLib_GetFriendlyIfIndex(void)
 // 导出函数
 ALCDECL AheadLib_GetIcmpStatistics(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[77 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIcmpStatistics")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[77 * TYPE long];
+	GetAddress("GetIcmpStatistics");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1708,14 +1302,8 @@ ALCDECL AheadLib_GetIcmpStatistics(void)
 // 导出函数
 ALCDECL AheadLib_GetIcmpStatisticsEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[78 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIcmpStatisticsEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[78 * TYPE long];
+	GetAddress("GetIcmpStatisticsEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1725,14 +1313,8 @@ ALCDECL AheadLib_GetIcmpStatisticsEx(void)
 // 导出函数
 ALCDECL AheadLib_GetIfEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[79 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[79 * TYPE long];
+	GetAddress("GetIfEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1742,14 +1324,8 @@ ALCDECL AheadLib_GetIfEntry2(void)
 // 导出函数
 ALCDECL AheadLib_GetIfEntry2Ex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[80 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfEntry2Ex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[80 * TYPE long];
+	GetAddress("GetIfEntry2Ex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1759,14 +1335,8 @@ ALCDECL AheadLib_GetIfEntry2Ex(void)
 // 导出函数
 ALCDECL AheadLib_GetIfEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[81 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[81 * TYPE long];
+	GetAddress("GetIfEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1776,14 +1346,8 @@ ALCDECL AheadLib_GetIfEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetIfStackTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[82 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfStackTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[82 * TYPE long];
+	GetAddress("GetIfStackTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1793,14 +1357,8 @@ ALCDECL AheadLib_GetIfStackTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIfTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[83 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[83 * TYPE long];
+	GetAddress("GetIfTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1810,14 +1368,8 @@ ALCDECL AheadLib_GetIfTable2(void)
 // 导出函数
 ALCDECL AheadLib_GetIfTable2Ex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[84 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfTable2Ex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[84 * TYPE long];
+	GetAddress("GetIfTable2Ex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1827,14 +1379,8 @@ ALCDECL AheadLib_GetIfTable2Ex(void)
 // 导出函数
 ALCDECL AheadLib_GetIfTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[85 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIfTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[85 * TYPE long];
+	GetAddress("GetIfTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1844,14 +1390,41 @@ ALCDECL AheadLib_GetIfTable(void)
 // 导出函数
 ALCDECL AheadLib_GetInterfaceCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[86 * TYPE long];
+	GetAddress("GetInterfaceCompartmentId");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("GetInterfaceCompartmentId")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[86 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_GetInterfaceCurrentTimestampCapabilities(void)
+{
+	GetAddress("GetInterfaceCurrentTimestampCapabilities");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_GetInterfaceDnsSettings(void)
+{
+	GetAddress("GetInterfaceDnsSettings");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_GetInterfaceHardwareTimestampCapabilities(void)
+{
+	GetAddress("GetInterfaceHardwareTimestampCapabilities");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1861,14 +1434,8 @@ ALCDECL AheadLib_GetInterfaceCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_GetInterfaceInfo(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[87 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetInterfaceInfo")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[87 * TYPE long];
+	GetAddress("GetInterfaceInfo");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1878,14 +1445,8 @@ ALCDECL AheadLib_GetInterfaceInfo(void)
 // 导出函数
 ALCDECL AheadLib_GetInvertedIfStackTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[88 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetInvertedIfStackTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[88 * TYPE long];
+	GetAddress("GetInvertedIfStackTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1895,14 +1456,8 @@ ALCDECL AheadLib_GetInvertedIfStackTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIpAddrTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[89 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpAddrTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[89 * TYPE long];
+	GetAddress("GetIpAddrTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1912,14 +1467,8 @@ ALCDECL AheadLib_GetIpAddrTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIpErrorString(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[90 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpErrorString")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[90 * TYPE long];
+	GetAddress("GetIpErrorString");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1929,14 +1478,8 @@ ALCDECL AheadLib_GetIpErrorString(void)
 // 导出函数
 ALCDECL AheadLib_GetIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[91 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[91 * TYPE long];
+	GetAddress("GetIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1946,14 +1489,8 @@ ALCDECL AheadLib_GetIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_GetIpForwardTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[92 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpForwardTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[92 * TYPE long];
+	GetAddress("GetIpForwardTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1963,14 +1500,8 @@ ALCDECL AheadLib_GetIpForwardTable2(void)
 // 导出函数
 ALCDECL AheadLib_GetIpForwardTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[93 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpForwardTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[93 * TYPE long];
+	GetAddress("GetIpForwardTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1980,14 +1511,8 @@ ALCDECL AheadLib_GetIpForwardTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIpInterfaceEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[94 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpInterfaceEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[94 * TYPE long];
+	GetAddress("GetIpInterfaceEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1997,14 +1522,8 @@ ALCDECL AheadLib_GetIpInterfaceEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetIpInterfaceTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[95 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpInterfaceTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[95 * TYPE long];
+	GetAddress("GetIpInterfaceTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2014,14 +1533,8 @@ ALCDECL AheadLib_GetIpInterfaceTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[96 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[96 * TYPE long];
+	GetAddress("GetIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2031,14 +1544,8 @@ ALCDECL AheadLib_GetIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_GetIpNetTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[97 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpNetTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[97 * TYPE long];
+	GetAddress("GetIpNetTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2048,14 +1555,8 @@ ALCDECL AheadLib_GetIpNetTable2(void)
 // 导出函数
 ALCDECL AheadLib_GetIpNetTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[98 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpNetTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[98 * TYPE long];
+	GetAddress("GetIpNetTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2065,14 +1566,8 @@ ALCDECL AheadLib_GetIpNetTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIpNetworkConnectionBandwidthEstimates(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[99 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpNetworkConnectionBandwidthEstimates")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[99 * TYPE long];
+	GetAddress("GetIpNetworkConnectionBandwidthEstimates");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2082,14 +1577,8 @@ ALCDECL AheadLib_GetIpNetworkConnectionBandwidthEstimates(void)
 // 导出函数
 ALCDECL AheadLib_GetIpPathEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[100 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpPathEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[100 * TYPE long];
+	GetAddress("GetIpPathEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2099,14 +1588,8 @@ ALCDECL AheadLib_GetIpPathEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetIpPathTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[101 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpPathTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[101 * TYPE long];
+	GetAddress("GetIpPathTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2116,14 +1599,8 @@ ALCDECL AheadLib_GetIpPathTable(void)
 // 导出函数
 ALCDECL AheadLib_GetIpStatistics(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[102 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpStatistics")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[102 * TYPE long];
+	GetAddress("GetIpStatistics");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2133,14 +1610,8 @@ ALCDECL AheadLib_GetIpStatistics(void)
 // 导出函数
 ALCDECL AheadLib_GetIpStatisticsEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[103 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetIpStatisticsEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[103 * TYPE long];
+	GetAddress("GetIpStatisticsEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2150,14 +1621,8 @@ ALCDECL AheadLib_GetIpStatisticsEx(void)
 // 导出函数
 ALCDECL AheadLib_GetJobCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[104 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetJobCompartmentId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[104 * TYPE long];
+	GetAddress("GetJobCompartmentId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2167,14 +1632,8 @@ ALCDECL AheadLib_GetJobCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_GetMulticastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[105 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetMulticastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[105 * TYPE long];
+	GetAddress("GetMulticastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2184,14 +1643,8 @@ ALCDECL AheadLib_GetMulticastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetMulticastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[106 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetMulticastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[106 * TYPE long];
+	GetAddress("GetMulticastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2201,14 +1654,8 @@ ALCDECL AheadLib_GetMulticastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_GetNetworkInformation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[107 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetNetworkInformation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[107 * TYPE long];
+	GetAddress("GetNetworkInformation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2218,14 +1665,8 @@ ALCDECL AheadLib_GetNetworkInformation(void)
 // 导出函数
 ALCDECL AheadLib_GetNetworkParams(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[108 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetNetworkParams")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[108 * TYPE long];
+	GetAddress("GetNetworkParams");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2235,14 +1676,8 @@ ALCDECL AheadLib_GetNetworkParams(void)
 // 导出函数
 ALCDECL AheadLib_GetNumberOfInterfaces(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[109 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetNumberOfInterfaces")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[109 * TYPE long];
+	GetAddress("GetNumberOfInterfaces");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2252,14 +1687,8 @@ ALCDECL AheadLib_GetNumberOfInterfaces(void)
 // 导出函数
 ALCDECL AheadLib_GetOwnerModuleFromPidAndInfo(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[110 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetOwnerModuleFromPidAndInfo")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[110 * TYPE long];
+	GetAddress("GetOwnerModuleFromPidAndInfo");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2269,14 +1698,8 @@ ALCDECL AheadLib_GetOwnerModuleFromPidAndInfo(void)
 // 导出函数
 ALCDECL AheadLib_GetOwnerModuleFromTcp6Entry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[111 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetOwnerModuleFromTcp6Entry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[111 * TYPE long];
+	GetAddress("GetOwnerModuleFromTcp6Entry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2286,14 +1709,8 @@ ALCDECL AheadLib_GetOwnerModuleFromTcp6Entry(void)
 // 导出函数
 ALCDECL AheadLib_GetOwnerModuleFromTcpEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[112 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetOwnerModuleFromTcpEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[112 * TYPE long];
+	GetAddress("GetOwnerModuleFromTcpEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2303,14 +1720,8 @@ ALCDECL AheadLib_GetOwnerModuleFromTcpEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetOwnerModuleFromUdp6Entry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[113 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetOwnerModuleFromUdp6Entry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[113 * TYPE long];
+	GetAddress("GetOwnerModuleFromUdp6Entry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2320,14 +1731,8 @@ ALCDECL AheadLib_GetOwnerModuleFromUdp6Entry(void)
 // 导出函数
 ALCDECL AheadLib_GetOwnerModuleFromUdpEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[114 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetOwnerModuleFromUdpEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[114 * TYPE long];
+	GetAddress("GetOwnerModuleFromUdpEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2337,14 +1742,8 @@ ALCDECL AheadLib_GetOwnerModuleFromUdpEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetPerAdapterInfo(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[115 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetPerAdapterInfo")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[115 * TYPE long];
+	GetAddress("GetPerAdapterInfo");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2354,14 +1753,8 @@ ALCDECL AheadLib_GetPerAdapterInfo(void)
 // 导出函数
 ALCDECL AheadLib_GetPerTcp6ConnectionEStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[116 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetPerTcp6ConnectionEStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[116 * TYPE long];
+	GetAddress("GetPerTcp6ConnectionEStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2371,14 +1764,8 @@ ALCDECL AheadLib_GetPerTcp6ConnectionEStats(void)
 // 导出函数
 ALCDECL AheadLib_GetPerTcp6ConnectionStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[117 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetPerTcp6ConnectionStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[117 * TYPE long];
+	GetAddress("GetPerTcp6ConnectionStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2388,14 +1775,8 @@ ALCDECL AheadLib_GetPerTcp6ConnectionStats(void)
 // 导出函数
 ALCDECL AheadLib_GetPerTcpConnectionEStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[118 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetPerTcpConnectionEStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[118 * TYPE long];
+	GetAddress("GetPerTcpConnectionEStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2405,14 +1786,8 @@ ALCDECL AheadLib_GetPerTcpConnectionEStats(void)
 // 导出函数
 ALCDECL AheadLib_GetPerTcpConnectionStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[119 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetPerTcpConnectionStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[119 * TYPE long];
+	GetAddress("GetPerTcpConnectionStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2422,14 +1797,8 @@ ALCDECL AheadLib_GetPerTcpConnectionStats(void)
 // 导出函数
 ALCDECL AheadLib_GetRTTAndHopCount(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[120 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetRTTAndHopCount")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[120 * TYPE long];
+	GetAddress("GetRTTAndHopCount");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2439,14 +1808,8 @@ ALCDECL AheadLib_GetRTTAndHopCount(void)
 // 导出函数
 ALCDECL AheadLib_GetSessionCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[121 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetSessionCompartmentId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[121 * TYPE long];
+	GetAddress("GetSessionCompartmentId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2456,14 +1819,8 @@ ALCDECL AheadLib_GetSessionCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_GetTcp6Table2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[122 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcp6Table2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[122 * TYPE long];
+	GetAddress("GetTcp6Table2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2473,14 +1830,8 @@ ALCDECL AheadLib_GetTcp6Table2(void)
 // 导出函数
 ALCDECL AheadLib_GetTcp6Table(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[123 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcp6Table")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[123 * TYPE long];
+	GetAddress("GetTcp6Table");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2490,14 +1841,8 @@ ALCDECL AheadLib_GetTcp6Table(void)
 // 导出函数
 ALCDECL AheadLib_GetTcpStatistics(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[124 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcpStatistics")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[124 * TYPE long];
+	GetAddress("GetTcpStatistics");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2507,14 +1852,8 @@ ALCDECL AheadLib_GetTcpStatistics(void)
 // 导出函数
 ALCDECL AheadLib_GetTcpStatisticsEx2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[125 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcpStatisticsEx2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[125 * TYPE long];
+	GetAddress("GetTcpStatisticsEx2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2524,14 +1863,8 @@ ALCDECL AheadLib_GetTcpStatisticsEx2(void)
 // 导出函数
 ALCDECL AheadLib_GetTcpStatisticsEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[126 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcpStatisticsEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[126 * TYPE long];
+	GetAddress("GetTcpStatisticsEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2541,14 +1874,8 @@ ALCDECL AheadLib_GetTcpStatisticsEx(void)
 // 导出函数
 ALCDECL AheadLib_GetTcpTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[127 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcpTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[127 * TYPE long];
+	GetAddress("GetTcpTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2558,14 +1885,8 @@ ALCDECL AheadLib_GetTcpTable2(void)
 // 导出函数
 ALCDECL AheadLib_GetTcpTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[128 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTcpTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[128 * TYPE long];
+	GetAddress("GetTcpTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2575,14 +1896,8 @@ ALCDECL AheadLib_GetTcpTable(void)
 // 导出函数
 ALCDECL AheadLib_GetTeredoPort(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[129 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetTeredoPort")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[129 * TYPE long];
+	GetAddress("GetTeredoPort");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2592,14 +1907,8 @@ ALCDECL AheadLib_GetTeredoPort(void)
 // 导出函数
 ALCDECL AheadLib_GetUdp6Table(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[130 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUdp6Table")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[130 * TYPE long];
+	GetAddress("GetUdp6Table");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2609,14 +1918,8 @@ ALCDECL AheadLib_GetUdp6Table(void)
 // 导出函数
 ALCDECL AheadLib_GetUdpStatistics(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[131 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUdpStatistics")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[131 * TYPE long];
+	GetAddress("GetUdpStatistics");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2626,14 +1929,8 @@ ALCDECL AheadLib_GetUdpStatistics(void)
 // 导出函数
 ALCDECL AheadLib_GetUdpStatisticsEx2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[132 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUdpStatisticsEx2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[132 * TYPE long];
+	GetAddress("GetUdpStatisticsEx2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2643,14 +1940,8 @@ ALCDECL AheadLib_GetUdpStatisticsEx2(void)
 // 导出函数
 ALCDECL AheadLib_GetUdpStatisticsEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[133 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUdpStatisticsEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[133 * TYPE long];
+	GetAddress("GetUdpStatisticsEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2660,14 +1951,8 @@ ALCDECL AheadLib_GetUdpStatisticsEx(void)
 // 导出函数
 ALCDECL AheadLib_GetUdpTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[134 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUdpTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[134 * TYPE long];
+	GetAddress("GetUdpTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2677,14 +1962,8 @@ ALCDECL AheadLib_GetUdpTable(void)
 // 导出函数
 ALCDECL AheadLib_GetUniDirectionalAdapterInfo(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[135 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUniDirectionalAdapterInfo")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[135 * TYPE long];
+	GetAddress("GetUniDirectionalAdapterInfo");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2694,14 +1973,8 @@ ALCDECL AheadLib_GetUniDirectionalAdapterInfo(void)
 // 导出函数
 ALCDECL AheadLib_GetUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[136 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[136 * TYPE long];
+	GetAddress("GetUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2711,14 +1984,8 @@ ALCDECL AheadLib_GetUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_GetUnicastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[137 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetUnicastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[137 * TYPE long];
+	GetAddress("GetUnicastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2728,14 +1995,8 @@ ALCDECL AheadLib_GetUnicastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_GetWPAOACSupportLevel(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[138 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("GetWPAOACSupportLevel")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[138 * TYPE long];
+	GetAddress("GetWPAOACSupportLevel");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2745,14 +2006,8 @@ ALCDECL AheadLib_GetWPAOACSupportLevel(void)
 // 导出函数
 ALCDECL AheadLib_Icmp6CreateFile(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[139 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("Icmp6CreateFile")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[139 * TYPE long];
+	GetAddress("Icmp6CreateFile");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2762,14 +2017,8 @@ ALCDECL AheadLib_Icmp6CreateFile(void)
 // 导出函数
 ALCDECL AheadLib_Icmp6ParseReplies(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[140 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("Icmp6ParseReplies")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[140 * TYPE long];
+	GetAddress("Icmp6ParseReplies");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2779,14 +2028,8 @@ ALCDECL AheadLib_Icmp6ParseReplies(void)
 // 导出函数
 ALCDECL AheadLib_Icmp6SendEcho2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[141 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("Icmp6SendEcho2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[141 * TYPE long];
+	GetAddress("Icmp6SendEcho2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2796,14 +2039,8 @@ ALCDECL AheadLib_Icmp6SendEcho2(void)
 // 导出函数
 ALCDECL AheadLib_IcmpCloseHandle(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[142 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IcmpCloseHandle")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[142 * TYPE long];
+	GetAddress("IcmpCloseHandle");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2813,14 +2050,8 @@ ALCDECL AheadLib_IcmpCloseHandle(void)
 // 导出函数
 ALCDECL AheadLib_IcmpCreateFile(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[143 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IcmpCreateFile")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[143 * TYPE long];
+	GetAddress("IcmpCreateFile");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2830,14 +2061,8 @@ ALCDECL AheadLib_IcmpCreateFile(void)
 // 导出函数
 ALCDECL AheadLib_IcmpParseReplies(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[144 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IcmpParseReplies")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[144 * TYPE long];
+	GetAddress("IcmpParseReplies");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2847,14 +2072,8 @@ ALCDECL AheadLib_IcmpParseReplies(void)
 // 导出函数
 ALCDECL AheadLib_IcmpSendEcho2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[145 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IcmpSendEcho2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[145 * TYPE long];
+	GetAddress("IcmpSendEcho2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2864,14 +2083,8 @@ ALCDECL AheadLib_IcmpSendEcho2(void)
 // 导出函数
 ALCDECL AheadLib_IcmpSendEcho2Ex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[146 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IcmpSendEcho2Ex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[146 * TYPE long];
+	GetAddress("IcmpSendEcho2Ex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2881,14 +2094,8 @@ ALCDECL AheadLib_IcmpSendEcho2Ex(void)
 // 导出函数
 ALCDECL AheadLib_IcmpSendEcho(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[147 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IcmpSendEcho")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[147 * TYPE long];
+	GetAddress("IcmpSendEcho");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2898,14 +2105,8 @@ ALCDECL AheadLib_IcmpSendEcho(void)
 // 导出函数
 ALCDECL AheadLib_InitializeCompartmentEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[148 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InitializeCompartmentEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[148 * TYPE long];
+	GetAddress("InitializeCompartmentEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2915,14 +2116,8 @@ ALCDECL AheadLib_InitializeCompartmentEntry(void)
 // 导出函数
 ALCDECL AheadLib_InitializeIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[149 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InitializeIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[149 * TYPE long];
+	GetAddress("InitializeIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2932,14 +2127,8 @@ ALCDECL AheadLib_InitializeIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_InitializeIpInterfaceEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[150 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InitializeIpInterfaceEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[150 * TYPE long];
+	GetAddress("InitializeIpInterfaceEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2949,14 +2138,8 @@ ALCDECL AheadLib_InitializeIpInterfaceEntry(void)
 // 导出函数
 ALCDECL AheadLib_InitializeUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[151 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InitializeUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[151 * TYPE long];
+	GetAddress("InitializeUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2966,14 +2149,8 @@ ALCDECL AheadLib_InitializeUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalCleanupPersistentStore(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[152 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCleanupPersistentStore")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[152 * TYPE long];
+	GetAddress("InternalCleanupPersistentStore");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2983,14 +2160,8 @@ ALCDECL AheadLib_InternalCleanupPersistentStore(void)
 // 导出函数
 ALCDECL AheadLib_InternalCreateAnycastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[153 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCreateAnycastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[153 * TYPE long];
+	GetAddress("InternalCreateAnycastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3000,14 +2171,8 @@ ALCDECL AheadLib_InternalCreateAnycastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalCreateIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[154 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCreateIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[154 * TYPE long];
+	GetAddress("InternalCreateIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3017,14 +2182,8 @@ ALCDECL AheadLib_InternalCreateIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalCreateIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[155 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCreateIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[155 * TYPE long];
+	GetAddress("InternalCreateIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3034,14 +2193,8 @@ ALCDECL AheadLib_InternalCreateIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalCreateIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[156 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCreateIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[156 * TYPE long];
+	GetAddress("InternalCreateIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3051,14 +2204,8 @@ ALCDECL AheadLib_InternalCreateIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalCreateIpNetEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[157 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCreateIpNetEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[157 * TYPE long];
+	GetAddress("InternalCreateIpNetEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3068,14 +2215,8 @@ ALCDECL AheadLib_InternalCreateIpNetEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalCreateUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[158 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalCreateUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[158 * TYPE long];
+	GetAddress("InternalCreateUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3085,14 +2226,8 @@ ALCDECL AheadLib_InternalCreateUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalDeleteAnycastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[159 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalDeleteAnycastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[159 * TYPE long];
+	GetAddress("InternalDeleteAnycastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3102,14 +2237,8 @@ ALCDECL AheadLib_InternalDeleteAnycastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalDeleteIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[160 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalDeleteIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[160 * TYPE long];
+	GetAddress("InternalDeleteIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3119,14 +2248,8 @@ ALCDECL AheadLib_InternalDeleteIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalDeleteIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[161 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalDeleteIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[161 * TYPE long];
+	GetAddress("InternalDeleteIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3136,14 +2259,8 @@ ALCDECL AheadLib_InternalDeleteIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalDeleteIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[162 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalDeleteIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[162 * TYPE long];
+	GetAddress("InternalDeleteIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3153,14 +2270,8 @@ ALCDECL AheadLib_InternalDeleteIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalDeleteIpNetEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[163 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalDeleteIpNetEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[163 * TYPE long];
+	GetAddress("InternalDeleteIpNetEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3170,14 +2281,8 @@ ALCDECL AheadLib_InternalDeleteIpNetEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalDeleteUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[164 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalDeleteUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[164 * TYPE long];
+	GetAddress("InternalDeleteUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3187,14 +2292,8 @@ ALCDECL AheadLib_InternalDeleteUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalFindInterfaceByAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[165 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalFindInterfaceByAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[165 * TYPE long];
+	GetAddress("InternalFindInterfaceByAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3204,14 +2303,8 @@ ALCDECL AheadLib_InternalFindInterfaceByAddress(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetAnycastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[166 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetAnycastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[166 * TYPE long];
+	GetAddress("InternalGetAnycastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3221,14 +2314,8 @@ ALCDECL AheadLib_InternalGetAnycastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetAnycastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[167 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetAnycastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[167 * TYPE long];
+	GetAddress("InternalGetAnycastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3238,14 +2325,8 @@ ALCDECL AheadLib_InternalGetAnycastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetBoundTcp6EndpointTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[168 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetBoundTcp6EndpointTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[168 * TYPE long];
+	GetAddress("InternalGetBoundTcp6EndpointTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3255,14 +2336,8 @@ ALCDECL AheadLib_InternalGetBoundTcp6EndpointTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetBoundTcpEndpointTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[169 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetBoundTcpEndpointTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[169 * TYPE long];
+	GetAddress("InternalGetBoundTcpEndpointTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3272,14 +2347,8 @@ ALCDECL AheadLib_InternalGetBoundTcpEndpointTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetForwardIpTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[170 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetForwardIpTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[170 * TYPE long];
+	GetAddress("InternalGetForwardIpTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3289,14 +2358,8 @@ ALCDECL AheadLib_InternalGetForwardIpTable2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIPPhysicalInterfaceForDestination(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[171 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIPPhysicalInterfaceForDestination")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[171 * TYPE long];
+	GetAddress("InternalGetIPPhysicalInterfaceForDestination");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3306,14 +2369,8 @@ ALCDECL AheadLib_InternalGetIPPhysicalInterfaceForDestination(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIfEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[172 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIfEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[172 * TYPE long];
+	GetAddress("InternalGetIfEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3323,14 +2380,8 @@ ALCDECL AheadLib_InternalGetIfEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIfTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[173 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIfTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[173 * TYPE long];
+	GetAddress("InternalGetIfTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3340,14 +2391,8 @@ ALCDECL AheadLib_InternalGetIfTable2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIfTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[174 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIfTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[174 * TYPE long];
+	GetAddress("InternalGetIfTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3357,14 +2402,8 @@ ALCDECL AheadLib_InternalGetIfTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpAddrTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[175 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpAddrTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[175 * TYPE long];
+	GetAddress("InternalGetIpAddrTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3374,14 +2413,8 @@ ALCDECL AheadLib_InternalGetIpAddrTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[176 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[176 * TYPE long];
+	GetAddress("InternalGetIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3391,14 +2424,8 @@ ALCDECL AheadLib_InternalGetIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpForwardTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[177 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpForwardTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[177 * TYPE long];
+	GetAddress("InternalGetIpForwardTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3408,14 +2435,8 @@ ALCDECL AheadLib_InternalGetIpForwardTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpInterfaceEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[178 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpInterfaceEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[178 * TYPE long];
+	GetAddress("InternalGetIpInterfaceEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3425,14 +2446,8 @@ ALCDECL AheadLib_InternalGetIpInterfaceEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpInterfaceTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[179 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpInterfaceTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[179 * TYPE long];
+	GetAddress("InternalGetIpInterfaceTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3442,14 +2457,8 @@ ALCDECL AheadLib_InternalGetIpInterfaceTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[180 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[180 * TYPE long];
+	GetAddress("InternalGetIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3459,14 +2468,8 @@ ALCDECL AheadLib_InternalGetIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpNetTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[181 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpNetTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[181 * TYPE long];
+	GetAddress("InternalGetIpNetTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3476,14 +2479,8 @@ ALCDECL AheadLib_InternalGetIpNetTable2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetIpNetTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[182 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetIpNetTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[182 * TYPE long];
+	GetAddress("InternalGetIpNetTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3493,14 +2490,8 @@ ALCDECL AheadLib_InternalGetIpNetTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetMulticastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[183 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetMulticastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[183 * TYPE long];
+	GetAddress("InternalGetMulticastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3510,14 +2501,8 @@ ALCDECL AheadLib_InternalGetMulticastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetMulticastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[184 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetMulticastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[184 * TYPE long];
+	GetAddress("InternalGetMulticastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3527,14 +2512,8 @@ ALCDECL AheadLib_InternalGetMulticastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetRtcSlotInformation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[185 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetRtcSlotInformation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[185 * TYPE long];
+	GetAddress("InternalGetRtcSlotInformation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3544,14 +2523,8 @@ ALCDECL AheadLib_InternalGetRtcSlotInformation(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcp6Table2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[186 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcp6Table2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[186 * TYPE long];
+	GetAddress("InternalGetTcp6Table2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3561,14 +2534,8 @@ ALCDECL AheadLib_InternalGetTcp6Table2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcp6TableWithOwnerModule(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[187 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcp6TableWithOwnerModule")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[187 * TYPE long];
+	GetAddress("InternalGetTcp6TableWithOwnerModule");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3578,14 +2545,8 @@ ALCDECL AheadLib_InternalGetTcp6TableWithOwnerModule(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcp6TableWithOwnerPid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[188 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcp6TableWithOwnerPid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[188 * TYPE long];
+	GetAddress("InternalGetTcp6TableWithOwnerPid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3595,14 +2556,8 @@ ALCDECL AheadLib_InternalGetTcp6TableWithOwnerPid(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcpTable2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[189 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcpTable2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[189 * TYPE long];
+	GetAddress("InternalGetTcpTable2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3612,14 +2567,8 @@ ALCDECL AheadLib_InternalGetTcpTable2(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcpTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[190 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcpTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[190 * TYPE long];
+	GetAddress("InternalGetTcpTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3629,14 +2578,8 @@ ALCDECL AheadLib_InternalGetTcpTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcpTableEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[191 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcpTableEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[191 * TYPE long];
+	GetAddress("InternalGetTcpTableEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3646,14 +2589,8 @@ ALCDECL AheadLib_InternalGetTcpTableEx(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcpTableWithOwnerModule(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[192 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcpTableWithOwnerModule")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[192 * TYPE long];
+	GetAddress("InternalGetTcpTableWithOwnerModule");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3663,14 +2600,8 @@ ALCDECL AheadLib_InternalGetTcpTableWithOwnerModule(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTcpTableWithOwnerPid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[193 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTcpTableWithOwnerPid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[193 * TYPE long];
+	GetAddress("InternalGetTcpTableWithOwnerPid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3680,14 +2611,8 @@ ALCDECL AheadLib_InternalGetTcpTableWithOwnerPid(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetTunnelPhysicalAdapter(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[194 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetTunnelPhysicalAdapter")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[194 * TYPE long];
+	GetAddress("InternalGetTunnelPhysicalAdapter");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3697,14 +2622,8 @@ ALCDECL AheadLib_InternalGetTunnelPhysicalAdapter(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUdp6TableWithOwnerModule(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[195 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUdp6TableWithOwnerModule")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[195 * TYPE long];
+	GetAddress("InternalGetUdp6TableWithOwnerModule");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3714,14 +2633,8 @@ ALCDECL AheadLib_InternalGetUdp6TableWithOwnerModule(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUdp6TableWithOwnerPid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[196 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUdp6TableWithOwnerPid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[196 * TYPE long];
+	GetAddress("InternalGetUdp6TableWithOwnerPid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3731,14 +2644,8 @@ ALCDECL AheadLib_InternalGetUdp6TableWithOwnerPid(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUdpTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[197 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUdpTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[197 * TYPE long];
+	GetAddress("InternalGetUdpTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3748,14 +2655,8 @@ ALCDECL AheadLib_InternalGetUdpTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUdpTableEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[198 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUdpTableEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[198 * TYPE long];
+	GetAddress("InternalGetUdpTableEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3765,14 +2666,8 @@ ALCDECL AheadLib_InternalGetUdpTableEx(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUdpTableWithOwnerModule(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[199 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUdpTableWithOwnerModule")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[199 * TYPE long];
+	GetAddress("InternalGetUdpTableWithOwnerModule");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3782,14 +2677,8 @@ ALCDECL AheadLib_InternalGetUdpTableWithOwnerModule(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUdpTableWithOwnerPid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[200 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUdpTableWithOwnerPid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[200 * TYPE long];
+	GetAddress("InternalGetUdpTableWithOwnerPid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3799,14 +2688,8 @@ ALCDECL AheadLib_InternalGetUdpTableWithOwnerPid(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[201 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[201 * TYPE long];
+	GetAddress("InternalGetUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3816,14 +2699,8 @@ ALCDECL AheadLib_InternalGetUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalGetUnicastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[202 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalGetUnicastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[202 * TYPE long];
+	GetAddress("InternalGetUnicastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3833,14 +2710,8 @@ ALCDECL AheadLib_InternalGetUnicastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_InternalIcmpCreateFileEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[203 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalIcmpCreateFileEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[203 * TYPE long];
+	GetAddress("InternalIcmpCreateFileEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3850,14 +2721,8 @@ ALCDECL AheadLib_InternalIcmpCreateFileEx(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIfEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[204 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIfEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[204 * TYPE long];
+	GetAddress("InternalSetIfEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3867,14 +2732,8 @@ ALCDECL AheadLib_InternalSetIfEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[205 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[205 * TYPE long];
+	GetAddress("InternalSetIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3884,14 +2743,8 @@ ALCDECL AheadLib_InternalSetIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[206 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[206 * TYPE long];
+	GetAddress("InternalSetIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3901,14 +2754,8 @@ ALCDECL AheadLib_InternalSetIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIpInterfaceEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[207 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIpInterfaceEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[207 * TYPE long];
+	GetAddress("InternalSetIpInterfaceEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3918,14 +2765,8 @@ ALCDECL AheadLib_InternalSetIpInterfaceEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[208 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[208 * TYPE long];
+	GetAddress("InternalSetIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3935,14 +2776,8 @@ ALCDECL AheadLib_InternalSetIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIpNetEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[209 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIpNetEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[209 * TYPE long];
+	GetAddress("InternalSetIpNetEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3952,14 +2787,8 @@ ALCDECL AheadLib_InternalSetIpNetEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetIpStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[210 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetIpStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[210 * TYPE long];
+	GetAddress("InternalSetIpStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3969,14 +2798,8 @@ ALCDECL AheadLib_InternalSetIpStats(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetTcpEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[211 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetTcpEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[211 * TYPE long];
+	GetAddress("InternalSetTcpEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3986,14 +2809,8 @@ ALCDECL AheadLib_InternalSetTcpEntry(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetTeredoPort(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[212 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetTeredoPort")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[212 * TYPE long];
+	GetAddress("InternalSetTeredoPort");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4003,14 +2820,8 @@ ALCDECL AheadLib_InternalSetTeredoPort(void)
 // 导出函数
 ALCDECL AheadLib_InternalSetUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[213 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("InternalSetUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[213 * TYPE long];
+	GetAddress("InternalSetUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4020,14 +2831,8 @@ ALCDECL AheadLib_InternalSetUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_IpReleaseAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[214 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IpReleaseAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[214 * TYPE long];
+	GetAddress("IpReleaseAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4037,14 +2842,8 @@ ALCDECL AheadLib_IpReleaseAddress(void)
 // 导出函数
 ALCDECL AheadLib_IpRenewAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[215 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("IpRenewAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[215 * TYPE long];
+	GetAddress("IpRenewAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4054,14 +2853,8 @@ ALCDECL AheadLib_IpRenewAddress(void)
 // 导出函数
 ALCDECL AheadLib_LookupPersistentTcpPortReservation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[216 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("LookupPersistentTcpPortReservation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[216 * TYPE long];
+	GetAddress("LookupPersistentTcpPortReservation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4071,14 +2864,8 @@ ALCDECL AheadLib_LookupPersistentTcpPortReservation(void)
 // 导出函数
 ALCDECL AheadLib_LookupPersistentUdpPortReservation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[217 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("LookupPersistentUdpPortReservation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[217 * TYPE long];
+	GetAddress("LookupPersistentUdpPortReservation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4088,14 +2875,8 @@ ALCDECL AheadLib_LookupPersistentUdpPortReservation(void)
 // 导出函数
 ALCDECL AheadLib_NTPTimeToNTFileTime(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[218 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NTPTimeToNTFileTime")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[218 * TYPE long];
+	GetAddress("NTPTimeToNTFileTime");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4105,14 +2886,8 @@ ALCDECL AheadLib_NTPTimeToNTFileTime(void)
 // 导出函数
 ALCDECL AheadLib_NTTimeToNTPTime(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[219 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NTTimeToNTPTime")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[219 * TYPE long];
+	GetAddress("NTTimeToNTPTime");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4122,14 +2897,8 @@ ALCDECL AheadLib_NTTimeToNTPTime(void)
 // 导出函数
 ALCDECL AheadLib_NhGetGuidFromInterfaceName(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[220 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NhGetGuidFromInterfaceName")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[220 * TYPE long];
+	GetAddress("NhGetGuidFromInterfaceName");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4139,14 +2908,8 @@ ALCDECL AheadLib_NhGetGuidFromInterfaceName(void)
 // 导出函数
 ALCDECL AheadLib_NhGetInterfaceDescriptionFromGuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[221 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NhGetInterfaceDescriptionFromGuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[221 * TYPE long];
+	GetAddress("NhGetInterfaceDescriptionFromGuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4156,14 +2919,8 @@ ALCDECL AheadLib_NhGetInterfaceDescriptionFromGuid(void)
 // 导出函数
 ALCDECL AheadLib_NhGetInterfaceNameFromDeviceGuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[222 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NhGetInterfaceNameFromDeviceGuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[222 * TYPE long];
+	GetAddress("NhGetInterfaceNameFromDeviceGuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4173,14 +2930,8 @@ ALCDECL AheadLib_NhGetInterfaceNameFromDeviceGuid(void)
 // 导出函数
 ALCDECL AheadLib_NhGetInterfaceNameFromGuid(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[223 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NhGetInterfaceNameFromGuid")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[223 * TYPE long];
+	GetAddress("NhGetInterfaceNameFromGuid");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4190,14 +2941,8 @@ ALCDECL AheadLib_NhGetInterfaceNameFromGuid(void)
 // 导出函数
 ALCDECL AheadLib_NhpAllocateAndGetInterfaceInfoFromStack(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[224 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NhpAllocateAndGetInterfaceInfoFromStack")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[224 * TYPE long];
+	GetAddress("NhpAllocateAndGetInterfaceInfoFromStack");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4207,14 +2952,8 @@ ALCDECL AheadLib_NhpAllocateAndGetInterfaceInfoFromStack(void)
 // 导出函数
 ALCDECL AheadLib_NotifyAddrChange(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[225 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyAddrChange")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[225 * TYPE long];
+	GetAddress("NotifyAddrChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4224,14 +2963,19 @@ ALCDECL AheadLib_NotifyAddrChange(void)
 // 导出函数
 ALCDECL AheadLib_NotifyCompartmentChange(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[226 * TYPE long];
+	GetAddress("NotifyCompartmentChange");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("NotifyCompartmentChange")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[226 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_NotifyIfTimestampConfigChange(void)
+{
+	GetAddress("NotifyIfTimestampConfigChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4241,14 +2985,8 @@ ALCDECL AheadLib_NotifyCompartmentChange(void)
 // 导出函数
 ALCDECL AheadLib_NotifyIpInterfaceChange(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[227 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyIpInterfaceChange")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[227 * TYPE long];
+	GetAddress("NotifyIpInterfaceChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4258,14 +2996,8 @@ ALCDECL AheadLib_NotifyIpInterfaceChange(void)
 // 导出函数
 ALCDECL AheadLib_NotifyRouteChange2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[228 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyRouteChange2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[228 * TYPE long];
+	GetAddress("NotifyRouteChange2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4275,14 +3007,8 @@ ALCDECL AheadLib_NotifyRouteChange2(void)
 // 导出函数
 ALCDECL AheadLib_NotifyRouteChange(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[229 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyRouteChange")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[229 * TYPE long];
+	GetAddress("NotifyRouteChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4292,14 +3018,8 @@ ALCDECL AheadLib_NotifyRouteChange(void)
 // 导出函数
 ALCDECL AheadLib_NotifyStableUnicastIpAddressTable(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[230 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyStableUnicastIpAddressTable")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[230 * TYPE long];
+	GetAddress("NotifyStableUnicastIpAddressTable");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4309,14 +3029,8 @@ ALCDECL AheadLib_NotifyStableUnicastIpAddressTable(void)
 // 导出函数
 ALCDECL AheadLib_NotifyTeredoPortChange(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[231 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyTeredoPortChange")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[231 * TYPE long];
+	GetAddress("NotifyTeredoPortChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4326,14 +3040,8 @@ ALCDECL AheadLib_NotifyTeredoPortChange(void)
 // 导出函数
 ALCDECL AheadLib_NotifyUnicastIpAddressChange(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[232 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("NotifyUnicastIpAddressChange")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[232 * TYPE long];
+	GetAddress("NotifyUnicastIpAddressChange");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4343,14 +3051,8 @@ ALCDECL AheadLib_NotifyUnicastIpAddressChange(void)
 // 导出函数
 ALCDECL AheadLib_OpenCompartment(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[233 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("OpenCompartment")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[233 * TYPE long];
+	GetAddress("OpenCompartment");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4360,14 +3062,8 @@ ALCDECL AheadLib_OpenCompartment(void)
 // 导出函数
 ALCDECL AheadLib_ParseNetworkString(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[234 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ParseNetworkString")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[234 * TYPE long];
+	GetAddress("ParseNetworkString");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4377,14 +3073,8 @@ ALCDECL AheadLib_ParseNetworkString(void)
 // 导出函数
 ALSTD PfAddFiltersToInterface(long, long, long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[235 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfAddFiltersToInterface@24")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[235 * TYPE long];
+	GetAddress("_PfAddFiltersToInterface@24");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4394,14 +3084,8 @@ ALSTD PfAddFiltersToInterface(long, long, long, long, long, long)
 // 导出函数
 ALSTD PfAddGlobalFilterToInterface(long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[236 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfAddGlobalFilterToInterface@8")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[236 * TYPE long];
+	GetAddress("_PfAddGlobalFilterToInterface@8");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4411,14 +3095,8 @@ ALSTD PfAddGlobalFilterToInterface(long, long)
 // 导出函数
 ALSTD PfBindInterfaceToIPAddress(long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[237 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfBindInterfaceToIPAddress@12")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[237 * TYPE long];
+	GetAddress("_PfBindInterfaceToIPAddress@12");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4428,14 +3106,8 @@ ALSTD PfBindInterfaceToIPAddress(long, long, long)
 // 导出函数
 ALSTD PfBindInterfaceToIndex(long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[238 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfBindInterfaceToIndex@16")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[238 * TYPE long];
+	GetAddress("_PfBindInterfaceToIndex@16");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4445,14 +3117,8 @@ ALSTD PfBindInterfaceToIndex(long, long, long, long)
 // 导出函数
 ALSTD PfCreateInterface(long, long, long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[239 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfCreateInterface@24")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[239 * TYPE long];
+	GetAddress("_PfCreateInterface@24");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4462,14 +3128,8 @@ ALSTD PfCreateInterface(long, long, long, long, long, long)
 // 导出函数
 ALSTD PfDeleteInterface(long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[240 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfDeleteInterface@4")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[240 * TYPE long];
+	GetAddress("_PfDeleteInterface@4");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4479,14 +3139,8 @@ ALSTD PfDeleteInterface(long)
 // 导出函数
 ALSTD PfDeleteLog(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[241 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfDeleteLog@0")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[241 * TYPE long];
+	GetAddress("_PfDeleteLog@0");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4496,14 +3150,8 @@ ALSTD PfDeleteLog(void)
 // 导出函数
 ALSTD PfGetInterfaceStatistics(long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[242 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfGetInterfaceStatistics@16")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[242 * TYPE long];
+	GetAddress("_PfGetInterfaceStatistics@16");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4513,14 +3161,8 @@ ALSTD PfGetInterfaceStatistics(long, long, long, long)
 // 导出函数
 ALSTD PfMakeLog(long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[243 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfMakeLog@4")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[243 * TYPE long];
+	GetAddress("_PfMakeLog@4");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4530,14 +3172,8 @@ ALSTD PfMakeLog(long)
 // 导出函数
 ALSTD PfRebindFilters(long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[244 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfRebindFilters@8")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[244 * TYPE long];
+	GetAddress("_PfRebindFilters@8");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4547,14 +3183,8 @@ ALSTD PfRebindFilters(long, long)
 // 导出函数
 ALSTD PfRemoveFilterHandles(long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[245 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfRemoveFilterHandles@12")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[245 * TYPE long];
+	GetAddress("_PfRemoveFilterHandles@12");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4564,14 +3194,8 @@ ALSTD PfRemoveFilterHandles(long, long, long)
 // 导出函数
 ALSTD PfRemoveFiltersFromInterface(long, long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[246 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfRemoveFiltersFromInterface@20")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[246 * TYPE long];
+	GetAddress("_PfRemoveFiltersFromInterface@20");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4581,14 +3205,8 @@ ALSTD PfRemoveFiltersFromInterface(long, long, long, long, long)
 // 导出函数
 ALSTD PfRemoveGlobalFilterFromInterface(long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[247 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfRemoveGlobalFilterFromInterface@8")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[247 * TYPE long];
+	GetAddress("_PfRemoveGlobalFilterFromInterface@8");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4598,14 +3216,8 @@ ALSTD PfRemoveGlobalFilterFromInterface(long, long)
 // 导出函数
 ALSTD PfSetLogBuffer(long, long, long, long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[248 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfSetLogBuffer@28")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[248 * TYPE long];
+	GetAddress("_PfSetLogBuffer@28");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4615,14 +3227,8 @@ ALSTD PfSetLogBuffer(long, long, long, long, long, long, long)
 // 导出函数
 ALSTD PfTestPacket(long, long, long, long, long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[249 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfTestPacket@20")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[249 * TYPE long];
+	GetAddress("_PfTestPacket@20");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4632,14 +3238,8 @@ ALSTD PfTestPacket(long, long, long, long, long)
 // 导出函数
 ALSTD PfUnBindInterface(long)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[250 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("_PfUnBindInterface@4")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[250 * TYPE long];
+	GetAddress("_PfUnBindInterface@4");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4649,14 +3249,8 @@ ALSTD PfUnBindInterface(long)
 // 导出函数
 ALCDECL AheadLib_ResolveIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[251 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ResolveIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[251 * TYPE long];
+	GetAddress("ResolveIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4666,14 +3260,8 @@ ALCDECL AheadLib_ResolveIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_ResolveNeighbor(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[252 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("ResolveNeighbor")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[252 * TYPE long];
+	GetAddress("ResolveNeighbor");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4683,14 +3271,8 @@ ALCDECL AheadLib_ResolveNeighbor(void)
 // 导出函数
 ALCDECL AheadLib_RestoreMediaSense(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[253 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("RestoreMediaSense")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[253 * TYPE long];
+	GetAddress("RestoreMediaSense");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4700,14 +3282,8 @@ ALCDECL AheadLib_RestoreMediaSense(void)
 // 导出函数
 ALCDECL AheadLib_SendARP(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[254 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SendARP")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[254 * TYPE long];
+	GetAddress("SendARP");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4717,14 +3293,8 @@ ALCDECL AheadLib_SendARP(void)
 // 导出函数
 ALCDECL AheadLib_SetAdapterIpAddress(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[255 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetAdapterIpAddress")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[255 * TYPE long];
+	GetAddress("SetAdapterIpAddress");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4734,14 +3304,8 @@ ALCDECL AheadLib_SetAdapterIpAddress(void)
 // 导出函数
 ALCDECL AheadLib_SetCurrentThreadCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[256 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetCurrentThreadCompartmentId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[256 * TYPE long];
+	GetAddress("SetCurrentThreadCompartmentId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4751,14 +3315,19 @@ ALCDECL AheadLib_SetCurrentThreadCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_SetCurrentThreadCompartmentScope(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[257 * TYPE long];
+	GetAddress("SetCurrentThreadCompartmentScope");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("SetCurrentThreadCompartmentScope")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[257 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_SetDnsSettings(void)
+{
+	GetAddress("SetDnsSettings");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4768,14 +3337,19 @@ ALCDECL AheadLib_SetCurrentThreadCompartmentScope(void)
 // 导出函数
 ALCDECL AheadLib_SetIfEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[258 * TYPE long];
+	GetAddress("SetIfEntry");
+	__asm JMP EAX;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 调用原始函数
-	GetAddress("SetIfEntry")();
 
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[258 * TYPE long];
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 导出函数
+ALCDECL AheadLib_SetInterfaceDnsSettings(void)
+{
+	GetAddress("SetInterfaceDnsSettings");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4785,14 +3359,8 @@ ALCDECL AheadLib_SetIfEntry(void)
 // 导出函数
 ALCDECL AheadLib_SetIpForwardEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[259 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpForwardEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[259 * TYPE long];
+	GetAddress("SetIpForwardEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4802,14 +3370,8 @@ ALCDECL AheadLib_SetIpForwardEntry2(void)
 // 导出函数
 ALCDECL AheadLib_SetIpForwardEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[260 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpForwardEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[260 * TYPE long];
+	GetAddress("SetIpForwardEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4819,14 +3381,8 @@ ALCDECL AheadLib_SetIpForwardEntry(void)
 // 导出函数
 ALCDECL AheadLib_SetIpInterfaceEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[261 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpInterfaceEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[261 * TYPE long];
+	GetAddress("SetIpInterfaceEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4836,14 +3392,8 @@ ALCDECL AheadLib_SetIpInterfaceEntry(void)
 // 导出函数
 ALCDECL AheadLib_SetIpNetEntry2(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[262 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpNetEntry2")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[262 * TYPE long];
+	GetAddress("SetIpNetEntry2");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4853,14 +3403,8 @@ ALCDECL AheadLib_SetIpNetEntry2(void)
 // 导出函数
 ALCDECL AheadLib_SetIpNetEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[263 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpNetEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[263 * TYPE long];
+	GetAddress("SetIpNetEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4870,14 +3414,8 @@ ALCDECL AheadLib_SetIpNetEntry(void)
 // 导出函数
 ALCDECL AheadLib_SetIpStatistics(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[264 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpStatistics")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[264 * TYPE long];
+	GetAddress("SetIpStatistics");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4887,14 +3425,8 @@ ALCDECL AheadLib_SetIpStatistics(void)
 // 导出函数
 ALCDECL AheadLib_SetIpStatisticsEx(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[265 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpStatisticsEx")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[265 * TYPE long];
+	GetAddress("SetIpStatisticsEx");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4904,14 +3436,8 @@ ALCDECL AheadLib_SetIpStatisticsEx(void)
 // 导出函数
 ALCDECL AheadLib_SetIpTTL(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[266 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetIpTTL")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[266 * TYPE long];
+	GetAddress("SetIpTTL");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4921,14 +3447,8 @@ ALCDECL AheadLib_SetIpTTL(void)
 // 导出函数
 ALCDECL AheadLib_SetJobCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[267 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetJobCompartmentId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[267 * TYPE long];
+	GetAddress("SetJobCompartmentId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4938,14 +3458,8 @@ ALCDECL AheadLib_SetJobCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_SetNetworkInformation(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[268 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetNetworkInformation")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[268 * TYPE long];
+	GetAddress("SetNetworkInformation");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4955,14 +3469,8 @@ ALCDECL AheadLib_SetNetworkInformation(void)
 // 导出函数
 ALCDECL AheadLib_SetPerTcp6ConnectionEStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[269 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetPerTcp6ConnectionEStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[269 * TYPE long];
+	GetAddress("SetPerTcp6ConnectionEStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4972,14 +3480,8 @@ ALCDECL AheadLib_SetPerTcp6ConnectionEStats(void)
 // 导出函数
 ALCDECL AheadLib_SetPerTcp6ConnectionStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[270 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetPerTcp6ConnectionStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[270 * TYPE long];
+	GetAddress("SetPerTcp6ConnectionStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4989,14 +3491,8 @@ ALCDECL AheadLib_SetPerTcp6ConnectionStats(void)
 // 导出函数
 ALCDECL AheadLib_SetPerTcpConnectionEStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[271 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetPerTcpConnectionEStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[271 * TYPE long];
+	GetAddress("SetPerTcpConnectionEStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5006,14 +3502,8 @@ ALCDECL AheadLib_SetPerTcpConnectionEStats(void)
 // 导出函数
 ALCDECL AheadLib_SetPerTcpConnectionStats(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[272 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetPerTcpConnectionStats")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[272 * TYPE long];
+	GetAddress("SetPerTcpConnectionStats");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5023,14 +3513,8 @@ ALCDECL AheadLib_SetPerTcpConnectionStats(void)
 // 导出函数
 ALCDECL AheadLib_SetSessionCompartmentId(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[273 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetSessionCompartmentId")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[273 * TYPE long];
+	GetAddress("SetSessionCompartmentId");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5040,14 +3524,8 @@ ALCDECL AheadLib_SetSessionCompartmentId(void)
 // 导出函数
 ALCDECL AheadLib_SetTcpEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[274 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetTcpEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[274 * TYPE long];
+	GetAddress("SetTcpEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5057,14 +3535,8 @@ ALCDECL AheadLib_SetTcpEntry(void)
 // 导出函数
 ALCDECL AheadLib_SetUnicastIpAddressEntry(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[275 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("SetUnicastIpAddressEntry")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[275 * TYPE long];
+	GetAddress("SetUnicastIpAddressEntry");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5074,14 +3546,8 @@ ALCDECL AheadLib_SetUnicastIpAddressEntry(void)
 // 导出函数
 ALCDECL AheadLib_UnenableRouter(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[276 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("UnenableRouter")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[276 * TYPE long];
+	GetAddress("UnenableRouter");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5091,14 +3557,8 @@ ALCDECL AheadLib_UnenableRouter(void)
 // 导出函数
 ALCDECL AheadLib_do_echo_rep(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[277 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("do_echo_rep")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[277 * TYPE long];
+	GetAddress("do_echo_rep");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5108,14 +3568,8 @@ ALCDECL AheadLib_do_echo_rep(void)
 // 导出函数
 ALCDECL AheadLib_do_echo_req(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[278 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("do_echo_req")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[278 * TYPE long];
+	GetAddress("do_echo_req");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5125,14 +3579,8 @@ ALCDECL AheadLib_do_echo_req(void)
 // 导出函数
 ALCDECL AheadLib_if_indextoname(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[279 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("if_indextoname")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[279 * TYPE long];
+	GetAddress("if_indextoname");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5142,14 +3590,8 @@ ALCDECL AheadLib_if_indextoname(void)
 // 导出函数
 ALCDECL AheadLib_if_nametoindex(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[280 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("if_nametoindex")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[280 * TYPE long];
+	GetAddress("if_nametoindex");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5159,13 +3601,7 @@ ALCDECL AheadLib_if_nametoindex(void)
 // 导出函数
 ALCDECL AheadLib_register_icmp(void)
 {
-	// 保存返回地址
-	__asm POP m_dwReturn[281 * TYPE long];
-
-	// 调用原始函数
-	GetAddress("register_icmp")();
-
-	// 转跳到返回地址
-	__asm JMP m_dwReturn[281 * TYPE long];
+	GetAddress("register_icmp");
+	__asm JMP EAX;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

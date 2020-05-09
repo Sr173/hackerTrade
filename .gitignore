@@ -16,3 +16,5 @@
 *.exe
 /hiject/t_baibaoyun_win32.dll
 /Debug
+/ymjh/Debug
+/ymjh/Release
