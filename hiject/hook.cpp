@@ -91,25 +91,12 @@ MyTerminateProcess(
 
 bool is_replace_next = false;
 
-typedef int(__thiscall* t_json_encode)(DWORD pThis, DWORD data);
+typedef int(__thiscall* t_json_encode)(DWORD pThis, char** data);
 t_json_encode o_json_encode;
-int __fastcall json_encode(DWORD data, DWORD data1, DWORD data2){
+int __fastcall json_encode(DWORD data, DWORD data1, char** data2){
+	//spdlog::info("-----------------------------------------------------------");
+	//std::cout << std::hex << data << " " << data1 << " " << data2 << std::endl;
 	int result = o_json_encode(data, data2);
-
-	replace_all(reinterpret_cast<std::string*>(data), "3DK", "2DK");
-
-	replace_all(reinterpret_cast<std::string*>(data), "FC56D1658482E78FF3D18283B06362A7", "C8826BC13927F2F76DB95021ADC9D998");
-
-	
-	// if (reinterpret_cast<std::string*>(data)->find("Login") == std::string::npos) {
-	// 	replace_all(reinterpret_cast<std::string*>(data), "fds324dfs", "66456804");
-	// }
-	if (reinterpret_cast<std::string*>(data)->find("UserLogin") != std::string::npos) {
-		is_replace_next = true;
-	}
-	//
-	
-	spdlog::info("{}", *reinterpret_cast<std::string*>(data));
 	return result;
 }
 
@@ -126,6 +113,13 @@ int __fastcall json_decode(DWORD data) {
 	return result;
 }
 
+typedef char* (* t_wchar_to_char)(DWORD a, DWORD b);
+t_wchar_to_char o_wchar_to_char;
+char* wchar_to_char(DWORD a, DWORD b) {
+	auto result = o_wchar_to_char(a, b);
+	spdlog::info("{}", result);
+	return result;
+}
 
 void hook() {
 	InitConsole();
@@ -138,24 +132,30 @@ void hook() {
 		while (!GetModuleHandle(L"Web.dll")) {
 			Sleep(0);
 		}
+		spdlog::info("hook");
 		auto hook = new HOOK_DETOUR;
 		auto handle_web = GetModuleHandle(L"Web.dll");
-		spdlog::info("Web {}", int((BYTE*)handle_web + 0x334F0));
+		spdlog::info("Web {}", int((BYTE*)handle_web + 0x33a90));
 		hook = new HOOK_DETOUR;
-		auto h_json_encode = ((BYTE*)handle_web + 0x334F0);
+		auto h_json_encode = ((BYTE*)handle_web + 0x33a90);
 		hook->SetupHook((BYTE*)h_json_encode, (BYTE*)&json_encode); //can cast to byte* to
 		hook->Hook();
 		o_json_encode = hook->GetOriginal<t_json_encode>();
 
+		//hook = new HOOK_DETOUR;
+		//auto h_wchar_to_char = ((BYTE*)handle_web + 0x3bb40);
+		//hook->SetupHook((BYTE*)h_wchar_to_char, (BYTE*)& wchar_to_char); //can cast to byte* to
+		//hook->Hook();
+		//o_wchar_to_char = hook->GetOriginal<t_wchar_to_char>();
 		
-		hook = new HOOK_DETOUR;
-		auto h_json_decode = ((BYTE*)handle_web + 0x35100);
-		hook->SetupHook((BYTE*)h_json_decode, (BYTE*)&json_decode); //can cast to byte* to
-		hook->Hook();
-		o_json_decode = hook->GetOriginal<t_json_decode>();
+		//
+		//hook = new HOOK_DETOUR;
+		//auto h_json_decode = ((BYTE*)handle_web + 0x33a90);
+		//hook->SetupHook((BYTE*)h_json_decode, (BYTE*)&json_decode); //can cast to byte* to
+		//hook->Hook();
+		//o_json_decode = hook->GetOriginal<t_json_decode>();
 		}).detach();
 	
-
 	
 	if (!handle_kernel32)
 	{
@@ -165,25 +165,6 @@ void hook() {
 			return;
 		}
 	}
-
-	auto hook = new HOOK_DETOUR;
-	hook = new HOOK_DETOUR;
-	auto h_CloseWindow = GetProcAddress(handle_user32, "CloseWindow");
-	hook->SetupHook((BYTE*)h_CloseWindow, (BYTE*)&MyCloseWindow); //can cast to byte* to
-	hook->Hook();
-
-	hook = new HOOK_DETOUR;
-	auto h_TerminateProcess = GetProcAddress(handle_kernel32, "TerminateProcess");
-	hook->SetupHook((BYTE*)h_TerminateProcess, (BYTE*)&MyTerminateProcess); //can cast to byte* to
-	hook->Hook();
-
-	hook = new HOOK_DETOUR;
-	auto h_connect = GetProcAddress(handle_ws2_32, "connect");
-	hook->SetupHook((BYTE*)h_connect, (BYTE*)& my_connect); //can cast to byte* to
-	hook->Hook();
-	o_connect = hook->GetOriginal<decltype(&connect)>();
-
-
 }
 
 
